@@ -1,0 +1,23 @@
+rate-limits:
+  - name: FAOSTAT REST API
+    description: >
+      FAO does not publish formal rate limit thresholds for the FAOSTAT API.
+      The API is publicly accessible without authentication. Responsible use is
+      expected from API consumers; heavy automated scraping or bulk polling is
+      discouraged in favour of the bulk download endpoints, which provide complete
+      dataset snapshots as zipped CSV files. The FAOSTAT team may throttle or
+      block abusive clients at their discretion.
+    url: https://www.fao.org/faostat/en/#developer-portal
+    limits:
+      - name: Requests per second
+        description: No published hard limit; responsible use expected
+        limit: null
+        unit: requests
+        per: second
+      - name: Bulk downloads
+        description: Complete domain datasets available as ZIP/CSV; preferred for large data pulls
+        limit: null
+        unit: downloads
+        per: day
+    contact:
+      email: faostat@fao.org

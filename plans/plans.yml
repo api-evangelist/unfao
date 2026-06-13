@@ -1,0 +1,25 @@
+plans:
+  - name: Free Public Access
+    description: >
+      FAOSTAT provides free, unrestricted public access to all agricultural and food
+      statistics data. No registration, API key, or authentication is required for
+      the standard REST API and bulk download endpoints. The new developer portal
+      (launched 2024) offers sign-in for enhanced features such as saved queries
+      and Excel integration, but core data access remains free and open.
+    url: https://www.fao.org/faostat/en/#developer-portal
+    pricing:
+      - name: Free
+        description: Unlimited free access to all FAOSTAT data domains
+        amount: 0
+        unit: USD
+        per: month
+    features:
+      - Access to 70+ data domains
+      - 180+ country coverage
+      - Historical data from 1961 to present
+      - JSON and CSV output formats
+      - Bulk download of complete datasets
+      - Metadata and dimension code access
+      - Area, item, element, and year filtering
+      - Query builder for Microsoft Excel
+      - No authentication required

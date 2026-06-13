@@ -1,0 +1,19 @@
+finops:
+  description: >
+    FAOSTAT is a free public service provided by the Food and Agriculture Organization
+    of the United Nations. There are no costs associated with accessing the API or
+    downloading datasets. FAO is funded through member-state contributions and
+    operates FAOSTAT as part of its mandate to collect, analyse, and disseminate
+    global food and agricultural statistics.
+  url: https://www.fao.org/faostat/en/
+  pricing-model: free
+  cost:
+    currency: USD
+    per-call: 0.00
+    per-month: 0.00
+  notes: >
+    No credit card, subscription, or registration is required for data access.
+    The developer portal offers sign-in for convenience features only.
+    Organizations that make heavy programmatic use are encouraged to use the
+    bulk download endpoints (bulks-faostat.fao.org) rather than repeated API calls
+    to individual endpoints, in order to reduce server load.

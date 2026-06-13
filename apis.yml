@@ -1,0 +1,82 @@
+name: FAO FAOSTAT
+description: >
+  The Food and Agriculture Organization (FAO) of the United Nations operates FAOSTAT,
+  the world's largest freely accessible database for food and agriculture statistics.
+  FAOSTAT provides REST APIs for programmatic access to agricultural production data,
+  food security indicators, trade flows, land use, environmental indicators, food
+  balances, and prices covering 180+ countries from 1961 to present across 70+
+  thematic domains.
+image: https://www.fao.org/favicon.ico
+tags:
+  - agriculture
+  - food security
+  - statistics
+  - trade
+  - land use
+  - environment
+  - UN
+  - open data
+url: https://www.fao.org/faostat/en/
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+apis:
+  - name: FAOSTAT Data API
+    description: >
+      REST API providing programmatic access to FAOSTAT's 70+ agricultural and food
+      statistics domains. Supports filtering by area, item, element, and year.
+      Returns JSON and CSV. No authentication required for public data access.
+    image: https://www.fao.org/favicon.ico
+    humanURL: https://www.fao.org/faostat/en/#developer-portal
+    baseURL: https://fenixservices.fao.org/faostat/api/v1
+    tags:
+      - agriculture
+      - food security
+      - statistics
+      - trade
+      - land use
+      - environment
+    properties:
+      - type: Documentation
+        url: https://www.fao.org/faostat/en/#developer-portal
+      - type: OpenAPI
+        url: https://fenixservices.fao.org/faostat/api/v1
+      - type: Plans
+        url: https://raw.githubusercontent.com/api-evangelist/unfao/refs/heads/main/plans/plans.yml
+      - type: RateLimits
+        url: https://raw.githubusercontent.com/api-evangelist/unfao/refs/heads/main/rate-limits/rate-limits.yml
+      - type: FinOps
+        url: https://raw.githubusercontent.com/api-evangelist/unfao/refs/heads/main/finops/finops.yml
+    contact:
+      - FN: FAOSTAT Support
+        email: faostat@fao.org
+        X-twitter: FAOstatistics
+    x-apis-io-score: 50
+  - name: FAOSTAT Bulk Download API
+    description: >
+      API for bulk downloading complete datasets for any FAOSTAT domain as zipped
+      CSV files. The catalog endpoint lists all available datasets with download
+      URLs and last-updated dates.
+    image: https://www.fao.org/favicon.ico
+    humanURL: https://www.fao.org/faostat/en/#data
+    baseURL: https://bulks-faostat.fao.org/production
+    tags:
+      - bulk download
+      - datasets
+      - agriculture
+      - food statistics
+    properties:
+      - type: Documentation
+        url: https://www.fao.org/faostat/en/#data
+      - type: Plans
+        url: https://raw.githubusercontent.com/api-evangelist/unfao/refs/heads/main/plans/plans.yml
+      - type: RateLimits
+        url: https://raw.githubusercontent.com/api-evangelist/unfao/refs/heads/main/rate-limits/rate-limits.yml
+    contact:
+      - FN: FAOSTAT Support
+        email: faostat@fao.org
+    x-apis-io-score: 45
+maintainers:
+  - FN: Kin Lane
+    X-twitter: kinlane
+    email: kin@apievangelist.com
