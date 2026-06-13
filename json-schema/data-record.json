@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unfao/main/json-schema/data-record.json",
+  "title": "FAOSTAT Data Record",
+  "description": "A single statistical observation from the FAOSTAT database. Each record represents one measurement of an element (e.g. area harvested, production quantity) for a specific area, item, and year combination.",
+  "type": "object",
+  "properties": {
+    "Area Code": {
+      "type": "integer",
+      "description": "FAO numeric area code identifying the country or region",
+      "examples": [5, 106, 231]
+    },
+    "Area Code (M49)": {
+      "type": "string",
+      "description": "UN M49 numeric area code",
+      "pattern": "^[0-9]{3}$",
+      "examples": ["156", "840", "356"]
+    },
+    "Area Code (ISO2)": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code",
+      "pattern": "^[A-Z]{2}$",
+      "examples": ["CN", "US", "IN"]
+    },
+    "Area Code (ISO3)": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-3 country code",
+      "pattern": "^[A-Z]{3}$",
+      "examples": ["CHN", "USA", "IND"]
+    },
+    "Area": {
+      "type": "string",
+      "description": "Human-readable area name",
+      "examples": ["China", "United States of America", "India"]
+    },
+    "Item Code": {
+      "type": "integer",
+      "description": "FAO numeric item (commodity) code",
+      "examples": [15, 27, 56]
+    },
+    "Item Code (CPC)": {
+      "type": "string",
+      "description": "Central Product Classification (CPC) item code",
+      "examples": ["0111", "0112", "0113"]
+    },
+    "Item": {
+      "type": "string",
+      "description": "Human-readable item (commodity) name",
+      "examples": ["Wheat", "Maize (corn)", "Rice"]
+    },
+    "Element Code": {
+      "type": "integer",
+      "description": "Numeric element code identifying the statistical measure",
+      "examples": [5510, 5312, 5525]
+    },
+    "Element": {
+      "type": "string",
+      "description": "Human-readable element (statistical measure) name",
+      "examples": ["Area harvested", "Production", "Yield"]
+    },
+    "Year Code": {
+      "type": "integer",
+      "description": "Numeric year code (typically equal to Year for single-year data)",
+      "minimum": 1961,
+      "examples": [2020, 2021, 2022]
+    },
+    "Year": {
+      "type": "integer",
+      "description": "Reference year for the observation",
+      "minimum": 1961,
+      "examples": [2020, 2021, 2022]
+    },
+    "Unit": {
+      "type": "string",
+      "description": "Unit of measurement for the value",
+      "examples": ["ha", "tonnes", "hg/ha", "1000 US$", "Head"]
+    },
+    "Value": {
+      "type": ["number", "null"],
+      "description": "Observed statistical value, or null if missing/unreported",
+      "examples": [23400000, 134250000, 57.3]
+    },
+    "Flag": {
+      "type": "string",
+      "description": "Data quality or source flag code",
+      "examples": ["A", "E", "F", "Im", "M", "T"]
+    },
+    "Flag Description": {
+      "type": "string",
+      "description": "Human-readable description of the flag meaning",
+      "examples": [
+        "Official figure",
+        "FAO estimate",
+        "FAO data based on imputation methodology",
+        "Country data made official by FAO",
+        "Missing value",
+        "Unofficial figure"
+      ]
+    },
+    "Note": {
+      "type": ["string", "null"],
+      "description": "Additional context or notes for this observation"
+    }
+  },
+  "required": ["Area Code", "Area", "Item Code", "Item", "Element Code", "Element", "Year", "Unit"],
+  "additionalProperties": true
+}

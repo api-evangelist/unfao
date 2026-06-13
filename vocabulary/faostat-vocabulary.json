@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FAOSTAT API Vocabulary",
+  "description": "Controlled vocabulary defining key concepts, codes, and terminology used across FAOSTAT APIs",
+  "version": "1.0.0",
+  "source": "https://www.fao.org/faostat/en/#definitions",
+  "terms": {
+    "Domain": {
+      "definition": "A thematic subject area within FAOSTAT covering a specific statistical topic. Each domain has a unique code (e.g. QCL for Crops and Livestock Products) used in API calls.",
+      "examples": ["QCL", "TM", "RL", "FS", "FBSH"],
+      "seeAlso": "https://www.fao.org/faostat/en/#data"
+    },
+    "Area": {
+      "definition": "A geographic unit (country, territory, or regional aggregate) for which data is reported. Areas have FAO codes, M49 codes, ISO2, and ISO3 identifiers.",
+      "codeSystem": "FAO area codes (numeric)",
+      "alternativeCodeSystems": ["M49", "ISO2", "ISO3"],
+      "examples": {
+        "5": "China",
+        "231": "United States of America",
+        "100": "Bulgaria",
+        "106": "India"
+      }
+    },
+    "Item": {
+      "definition": "An agricultural commodity, product, or category for which data is collected. Items use FAO codes or CPC (Central Product Classification) codes.",
+      "codeSystem": "FAO item codes (numeric)",
+      "alternativeCodeSystems": ["CPC"],
+      "examples": {
+        "15": "Wheat",
+        "27": "Maize (corn)",
+        "56": "Soybeans",
+        "866": "Cattle",
+        "1242": "Indigenous Cattle Meat"
+      }
+    },
+    "Element": {
+      "definition": "A statistical measure or variable type for which values are recorded. For example, area harvested (ha), production quantity (tonnes), or yield (hg/ha).",
+      "codeSystem": "FAO element codes (numeric)",
+      "examples": {
+        "5510": "Area harvested",
+        "5312": "Production",
+        "5525": "Yield",
+        "5610": "Export Quantity",
+        "5622": "Export Value",
+        "5910": "Import Quantity",
+        "5922": "Import Value"
+      }
+    },
+    "Flag": {
+      "definition": "A data quality or source indicator attached to each statistical value. Flags denote whether values are official, estimated, imputed, projected, or missing.",
+      "values": {
+        "A": "Official figure",
+        "Ag": "Aggregate, may include official, semi-official, estimated or calculated data",
+        "E": "FAO estimate",
+        "F": "FAO data based on imputation methodology",
+        "Fc": "Calculated data",
+        "Im": "Country data made official by FAO",
+        "M": "Missing value; data cannot exist; not applicable",
+        "N": "Not significant",
+        "NR": "Restricted: not for dissemination",
+        "P": "Provisional official data",
+        "Q": "Official data reported on FAO Questionnaire",
+        "R": "Estimated data using trading partners database",
+        "S": "Standardized data",
+        "Sd": "Calculated data",
+        "Su": "Unofficial figure",
+        "T": "Unofficial figure",
+        "W": "Includes official, estimated, calculated, and unofficial data",
+        "X": "International organizations data"
+      }
+    },
+    "OutputType": {
+      "definition": "The format in which API results are returned.",
+      "values": {
+        "objects": "JSON array of objects with named fields (default)",
+        "arrays": "JSON array of arrays (header row + data rows)",
+        "csv": "Plain text CSV format"
+      }
+    },
+    "AreaCodeSystem": {
+      "definition": "The coding system used to identify areas in API queries.",
+      "values": {
+        "FAO": "FAO proprietary numeric codes (default)",
+        "ISO2": "ISO 3166-1 alpha-2 two-letter country codes",
+        "ISO3": "ISO 3166-1 alpha-3 three-letter country codes",
+        "M49": "UN Statistics Division M49 numeric codes"
+      }
+    },
+    "ItemCodeSystem": {
+      "definition": "The coding system used to identify items (commodities) in API queries.",
+      "values": {
+        "FAO": "FAO proprietary item codes (default)",
+        "CPC": "Central Product Classification (CPC) codes"
+      }
+    },
+    "Language": {
+      "definition": "Response language for labels and descriptions returned by the API.",
+      "values": {
+        "en": "English (default)",
+        "es": "Spanish (Español)",
+        "fr": "French (Français)",
+        "ar": "Arabic (العربية)",
+        "zh": "Chinese (中文)",
+        "ru": "Russian (Русский)"
+      }
+    },
+    "DomainGroups": {
+      "definition": "Top-level thematic groupings that organize FAOSTAT domains by subject area.",
+      "values": {
+        "QC": "Production",
+        "TM": "Trade",
+        "FS": "Food Security and Nutrition",
+        "FB": "Food Balances",
+        "RL": "Land, Inputs and Sustainability",
+        "EA": "Climate Change",
+        "PP": "Prices",
+        "PA": "Population and Employment",
+        "ET": "Investment",
+        "ES": "Macro-Statistics"
+      }
+    }
+  }
+}

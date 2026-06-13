@@ -1,0 +1,87 @@
+{
+  "@context": "https://raw.githubusercontent.com/api-evangelist/unfao/main/json-ld/faostat-context.jsonld",
+  "@type": "dcat:Catalog",
+  "@id": "https://www.fao.org/faostat/en/",
+  "title": "FAOSTAT - Food and Agriculture Organization Statistical Database",
+  "description": "The world's largest freely accessible database for food and agriculture statistics, operated by the UN Food and Agriculture Organization. Covers 180+ countries from 1961 to present across 70+ thematic domains.",
+  "publisher": {
+    "@id": "https://www.fao.org/",
+    "@type": "schema:Organization",
+    "schema:name": "Food and Agriculture Organization of the United Nations (FAO)",
+    "schema:url": "https://www.fao.org/"
+  },
+  "license": "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/",
+  "spatial": "https://www.geonames.org/6295630",
+  "temporal": "1961/present",
+  "dataset": [
+    {
+      "@type": "dcat:Dataset",
+      "@id": "https://fenixservices.fao.org/faostat/api/v1/en/data/QCL",
+      "domainCode": "QCL",
+      "domainName": "Crops and livestock products",
+      "groupCode": "QC",
+      "groupName": "Production",
+      "description": "Primary crop and livestock production data including area harvested, production quantity, yield, and number of animals. Covers 180+ countries from 1961 to present for 200+ commodities.",
+      "distribution": {
+        "@type": "dcat:Distribution",
+        "downloadURL": "https://bulks-faostat.fao.org/production/Production_Crops_Livestock_E_All_Data_NOFLAG.zip",
+        "mediaType": "application/zip",
+        "description": "Complete QCL domain bulk download (ZIP containing CSV)"
+      }
+    },
+    {
+      "@type": "dcat:Dataset",
+      "@id": "https://fenixservices.fao.org/faostat/api/v1/en/data/TCL",
+      "domainCode": "TCL",
+      "groupCode": "TM",
+      "groupName": "Trade",
+      "domainName": "Crops and livestock products trade",
+      "description": "Import and export quantities and values for agricultural commodities. Covers 180+ countries from 1986 to present."
+    },
+    {
+      "@type": "dcat:Dataset",
+      "@id": "https://fenixservices.fao.org/faostat/api/v1/en/data/RL",
+      "domainCode": "RL",
+      "groupCode": "RL",
+      "groupName": "Land, Inputs and Sustainability",
+      "domainName": "Land Use",
+      "description": "Land use and land cover statistics including agricultural land, arable land, permanent crops, and forest area. Covers 180+ countries from 1961 to present."
+    },
+    {
+      "@type": "dcat:Dataset",
+      "@id": "https://fenixservices.fao.org/faostat/api/v1/en/data/FS",
+      "domainCode": "FS",
+      "groupCode": "FS",
+      "groupName": "Food Security and Nutrition",
+      "domainName": "Suite of Food Security Indicators",
+      "description": "Comprehensive set of food security indicators covering availability, access, utilization, and stability dimensions. Supports SDG 2 monitoring."
+    },
+    {
+      "@type": "dcat:Dataset",
+      "@id": "https://fenixservices.fao.org/faostat/api/v1/en/data/FBSH",
+      "domainCode": "FBSH",
+      "groupCode": "FB",
+      "groupName": "Food Balances",
+      "domainName": "Food Balances (2010-)",
+      "description": "National food supply and utilization data used to monitor food availability and dietary energy supply. Covers 180+ countries from 2010 to present."
+    },
+    {
+      "@type": "dcat:Dataset",
+      "@id": "https://fenixservices.fao.org/faostat/api/v1/en/data/GI",
+      "domainCode": "GI",
+      "groupCode": "EA",
+      "groupName": "Climate Change",
+      "domainName": "Agrifood systems emissions",
+      "description": "Greenhouse gas emissions from agrifood systems including crop cultivation, livestock, land use change, and supply chain activities."
+    },
+    {
+      "@type": "dcat:Dataset",
+      "@id": "https://fenixservices.fao.org/faostat/api/v1/en/data/PP",
+      "domainCode": "PP",
+      "groupCode": "PP",
+      "groupName": "Prices",
+      "domainName": "Producer Prices",
+      "description": "Annual producer prices for agricultural commodities received by farmers at the farm gate."
+    }
+  ]
+}

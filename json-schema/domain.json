@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unfao/main/json-schema/domain.json",
+  "title": "FAOSTAT Domain",
+  "description": "A FAOSTAT thematic domain representing a specific subject area of agricultural or food statistics, such as crop production, trade, land use, or food security.",
+  "type": "object",
+  "properties": {
+    "Group Code": {
+      "type": "string",
+      "description": "Code of the parent domain group",
+      "examples": ["QC", "TM", "RL", "FS"]
+    },
+    "Group Name": {
+      "type": "string",
+      "description": "Name of the parent domain group",
+      "examples": ["Production", "Trade", "Land, Inputs and Sustainability", "Food Security and Nutrition"]
+    },
+    "Domain Code": {
+      "type": "string",
+      "description": "Unique code identifying the domain, used as a path parameter in API calls",
+      "examples": ["QCL", "TM", "RL", "FS"]
+    },
+    "Domain Name": {
+      "type": "string",
+      "description": "Human-readable domain name",
+      "examples": ["Crops and livestock products", "Trade indices", "Land Use", "Suite of Food Security Indicators"]
+    },
+    "Date Update": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the domain data was last updated",
+      "examples": ["2023-11-01", "2023-12-15"]
+    }
+  },
+  "required": ["Domain Code", "Domain Name"],
+  "additionalProperties": true
+}

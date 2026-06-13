@@ -1,0 +1,139 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "fao": "http://www.fao.org/faostat/ontology#",
+    "sdmx": "http://purl.org/linked-data/sdmx/2009/concept#",
+    "faostat": {
+      "@id": "fao:",
+      "@prefix": true
+    },
+    "DataRecord": "fao:DataRecord",
+    "Domain": "fao:Domain",
+    "Area": "fao:Area",
+    "Item": "fao:Item",
+    "Element": "fao:Element",
+    "areaCode": {
+      "@id": "fao:areaCode",
+      "@type": "xsd:integer"
+    },
+    "areaCodeM49": {
+      "@id": "fao:areaCodeM49",
+      "@type": "xsd:string"
+    },
+    "areaCodeISO2": {
+      "@id": "fao:areaCodeISO2",
+      "@type": "xsd:string"
+    },
+    "areaCodeISO3": {
+      "@id": "fao:areaCodeISO3",
+      "@type": "xsd:string"
+    },
+    "areaName": {
+      "@id": "fao:areaName",
+      "@type": "xsd:string"
+    },
+    "itemCode": {
+      "@id": "fao:itemCode",
+      "@type": "xsd:integer"
+    },
+    "itemCodeCPC": {
+      "@id": "fao:itemCodeCPC",
+      "@type": "xsd:string"
+    },
+    "itemName": {
+      "@id": "fao:itemName",
+      "@type": "xsd:string"
+    },
+    "elementCode": {
+      "@id": "fao:elementCode",
+      "@type": "xsd:integer"
+    },
+    "elementName": {
+      "@id": "fao:elementName",
+      "@type": "xsd:string"
+    },
+    "year": {
+      "@id": "dcterms:temporal",
+      "@type": "xsd:integer"
+    },
+    "unit": {
+      "@id": "schema:unitText",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "schema:value",
+      "@type": "xsd:decimal"
+    },
+    "flag": {
+      "@id": "fao:flag",
+      "@type": "xsd:string"
+    },
+    "flagDescription": {
+      "@id": "fao:flagDescription",
+      "@type": "xsd:string"
+    },
+    "domainCode": {
+      "@id": "fao:domainCode",
+      "@type": "xsd:string"
+    },
+    "domainName": {
+      "@id": "fao:domainName",
+      "@type": "xsd:string"
+    },
+    "groupCode": {
+      "@id": "fao:groupCode",
+      "@type": "xsd:string"
+    },
+    "groupName": {
+      "@id": "fao:groupName",
+      "@type": "xsd:string"
+    },
+    "dateUpdate": {
+      "@id": "dcterms:modified",
+      "@type": "xsd:date"
+    },
+    "dataset": {
+      "@id": "dcat:Dataset",
+      "@type": "@id"
+    },
+    "distribution": {
+      "@id": "dcat:distribution",
+      "@type": "@id"
+    },
+    "downloadURL": {
+      "@id": "dcat:downloadURL",
+      "@type": "@id"
+    },
+    "mediaType": {
+      "@id": "dcat:mediaType",
+      "@type": "xsd:string"
+    },
+    "description": "dcterms:description",
+    "title": "dcterms:title",
+    "publisher": {
+      "@id": "dcterms:publisher",
+      "@type": "@id"
+    },
+    "license": {
+      "@id": "dcterms:license",
+      "@type": "@id"
+    },
+    "coverage": {
+      "@id": "dcterms:coverage",
+      "@type": "xsd:string"
+    },
+    "spatial": {
+      "@id": "dcterms:spatial",
+      "@type": "@id"
+    },
+    "temporal": {
+      "@id": "dcterms:temporal",
+      "@type": "xsd:string"
+    }
+  }
+}

@@ -1,0 +1,894 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FAOSTAT Data API",
+    "description": "The Food and Agriculture Organization (FAO) of the United Nations FAOSTAT REST API provides programmatic access to the world's largest freely accessible database for food and agriculture statistics. FAOSTAT covers 180+ countries from 1961 to present across 70+ thematic domains including agricultural production, food security, trade flows, land use, environmental indicators, food balances, and prices. No authentication is required for public data access.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "FAOSTAT Support",
+      "email": "faostat@fao.org",
+      "url": "https://www.fao.org/faostat/en/#developer-portal"
+    },
+    "license": {
+      "name": "CC BY-NC-SA 3.0 IGO",
+      "url": "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/"
+    },
+    "termsOfService": "https://www.fao.org/contact-us/terms/en/"
+  },
+  "servers": [
+    {
+      "url": "https://fenixservices.fao.org/faostat/api/v1",
+      "description": "FAOSTAT API v1 Production Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Domains",
+      "description": "Operations for browsing available FAOSTAT domains and groups"
+    },
+    {
+      "name": "Dimensions",
+      "description": "Operations for querying dimension members (areas, items, elements, years, flags)"
+    },
+    {
+      "name": "Data",
+      "description": "Operations for retrieving FAOSTAT statistical data"
+    },
+    {
+      "name": "Metadata",
+      "description": "Operations for retrieving dataset and indicator metadata"
+    }
+  ],
+  "paths": {
+    "/{lang}/groupsanddomains": {
+      "get": {
+        "tags": ["Domains"],
+        "operationId": "getGroupsAndDomains",
+        "summary": "List all domain groups and domains",
+        "description": "Returns the complete hierarchical list of FAOSTAT domain groups and their child domains. Each domain has a unique code used in subsequent data queries.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/lang"
+          },
+          {
+            "$ref": "#/components/parameters/output_type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with groups and domains list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupsAndDomainsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{lang}/definitions/types/domain": {
+      "get": {
+        "tags": ["Domains"],
+        "operationId": "getDomainList",
+        "summary": "List all available domains",
+        "description": "Returns a flat list of all FAOSTAT domains with their codes, names, and last update information.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/lang"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with domain list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{lang}/dimensions/{domain}": {
+      "get": {
+        "tags": ["Dimensions"],
+        "operationId": "getDomainDimensions",
+        "summary": "Get dimensions available for a domain",
+        "description": "Returns all available filter dimensions (area, item, element, year, flag) for a specific FAOSTAT domain.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/lang"
+          },
+          {
+            "$ref": "#/components/parameters/domain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with dimension list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DimensionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{lang}/dimensions/{domain}/{dimension}": {
+      "get": {
+        "tags": ["Dimensions"],
+        "operationId": "getDimensionMembers",
+        "summary": "Get members of a specific dimension",
+        "description": "Returns all valid members (codes and labels) for a given dimension within a FAOSTAT domain. Use dimension codes: area, item, element, year, flag.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/lang"
+          },
+          {
+            "$ref": "#/components/parameters/domain"
+          },
+          {
+            "name": "dimension",
+            "in": "path",
+            "required": true,
+            "description": "Dimension name (area, item, element, year, flag)",
+            "schema": {
+              "type": "string",
+              "enum": ["area", "item", "element", "year", "flag"]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/output_type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with dimension members",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DimensionMembersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{lang}/data/{domain}": {
+      "get": {
+        "tags": ["Data"],
+        "operationId": "getDomainData",
+        "summary": "Query data from a FAOSTAT domain",
+        "description": "Retrieves statistical data records from a specific FAOSTAT domain. Multiple filter values can be comma-separated. Returns JSON or CSV depending on output_type. When no filters are provided, returns all data for the domain (may be large).",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/lang"
+          },
+          {
+            "$ref": "#/components/parameters/domain"
+          },
+          {
+            "name": "area",
+            "in": "query",
+            "description": "Comma-separated area codes (country/region codes, e.g. 5 for China). Use dimension endpoint to discover valid codes.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "5,106"
+          },
+          {
+            "name": "item",
+            "in": "query",
+            "description": "Comma-separated item codes (commodity codes, e.g. 15 for Wheat). Use dimension endpoint to discover valid codes.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "15,27"
+          },
+          {
+            "name": "element",
+            "in": "query",
+            "description": "Comma-separated element codes (statistical measure codes, e.g. 5510 for Area harvested). Use dimension endpoint to discover valid codes.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "5510,5312"
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Comma-separated year values (e.g. 2020,2021,2022). Supports range notation.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2020,2021"
+          },
+          {
+            "name": "year_start",
+            "in": "query",
+            "description": "Start year for a date range filter (inclusive).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1961
+            },
+            "example": 2000
+          },
+          {
+            "name": "year_end",
+            "in": "query",
+            "description": "End year for a date range filter (inclusive).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1961
+            },
+            "example": 2022
+          },
+          {
+            "name": "area_cs",
+            "in": "query",
+            "description": "Area code system to use: FAO (default) or ISO2, ISO3, M49.",
+            "schema": {
+              "type": "string",
+              "enum": ["FAO", "ISO2", "ISO3", "M49"],
+              "default": "FAO"
+            }
+          },
+          {
+            "name": "item_cs",
+            "in": "query",
+            "description": "Item code system to use: FAO (default) or CPC.",
+            "schema": {
+              "type": "string",
+              "enum": ["FAO", "CPC"],
+              "default": "FAO"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/output_type"
+          },
+          {
+            "name": "null_values",
+            "in": "query",
+            "description": "Include null/missing values in the response (true or false).",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "show_codes",
+            "in": "query",
+            "description": "Include dimension codes alongside labels in response (true or false).",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "show_unit",
+            "in": "query",
+            "description": "Include unit of measurement in response (true or false).",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "show_flags",
+            "in": "query",
+            "description": "Include data quality flags in response (true or false).",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "CSV-formatted data (when output_type=csv)"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{lang}/definitions/types/flag": {
+      "get": {
+        "tags": ["Metadata"],
+        "operationId": "getFlags",
+        "summary": "List all data quality flags",
+        "description": "Returns all FAOSTAT data quality and source flags with their descriptions. Flags indicate whether data is official, estimated, calculated, FAO projection, etc.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/lang"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with flag definitions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlagListResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{lang}/definitions/types/area": {
+      "get": {
+        "tags": ["Dimensions"],
+        "operationId": "getAreaList",
+        "summary": "List all areas (countries and regions)",
+        "description": "Returns all areas (countries, territories, and regional aggregates) available in FAOSTAT with their codes and names.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/lang"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with area list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AreaListResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{lang}/definitions/types/area/{area_code}": {
+      "get": {
+        "tags": ["Dimensions"],
+        "operationId": "getAreaDetail",
+        "summary": "Get details for a specific area",
+        "description": "Returns detailed information for a specific area including its full name, ISO codes, and regional membership.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/lang"
+          },
+          {
+            "name": "area_code",
+            "in": "path",
+            "required": true,
+            "description": "FAO area code (numeric)",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with area detail",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AreaDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{lang}/metadata/{domain}": {
+      "get": {
+        "tags": ["Metadata"],
+        "operationId": "getDomainMetadata",
+        "summary": "Get metadata for a FAOSTAT domain",
+        "description": "Returns descriptive metadata for a FAOSTAT domain including methodology, coverage, concepts, and data sources.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/lang"
+          },
+          {
+            "$ref": "#/components/parameters/domain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with domain metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainMetadata"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "lang": {
+        "name": "lang",
+        "in": "path",
+        "required": true,
+        "description": "Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)",
+        "schema": {
+          "type": "string",
+          "enum": ["en", "es", "fr", "ar", "zh", "ru"],
+          "default": "en"
+        }
+      },
+      "domain": {
+        "name": "domain",
+        "in": "path",
+        "required": true,
+        "description": "FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)",
+        "schema": {
+          "type": "string"
+        },
+        "example": "QCL"
+      },
+      "output_type": {
+        "name": "output_type",
+        "in": "query",
+        "description": "Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)",
+        "schema": {
+          "type": "string",
+          "enum": ["objects", "arrays", "csv"],
+          "default": "objects"
+        }
+      }
+    },
+    "schemas": {
+      "GroupsAndDomainsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DomainGroup"
+            }
+          }
+        }
+      },
+      "DomainGroup": {
+        "type": "object",
+        "properties": {
+          "Group Code": {
+            "type": "string",
+            "description": "Unique code for the domain group",
+            "example": "QC"
+          },
+          "Group Name": {
+            "type": "string",
+            "description": "Display name of the domain group",
+            "example": "Production"
+          },
+          "Domain Code": {
+            "type": "string",
+            "description": "Unique code for the domain",
+            "example": "QCL"
+          },
+          "Domain Name": {
+            "type": "string",
+            "description": "Display name of the domain",
+            "example": "Crops and livestock products"
+          },
+          "Date Update": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of last data update",
+            "example": "2023-11-01"
+          }
+        }
+      },
+      "DomainListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Domain"
+            }
+          }
+        }
+      },
+      "Domain": {
+        "type": "object",
+        "properties": {
+          "Domain Code": {
+            "type": "string",
+            "description": "Unique domain code",
+            "example": "QCL"
+          },
+          "Domain Name": {
+            "type": "string",
+            "description": "Display name of the domain",
+            "example": "Crops and livestock products"
+          },
+          "Date Update": {
+            "type": "string",
+            "format": "date",
+            "description": "Last update date",
+            "example": "2023-11-01"
+          }
+        }
+      },
+      "DimensionsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dimension"
+            }
+          }
+        }
+      },
+      "Dimension": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Dimension identifier",
+            "example": "area"
+          },
+          "label": {
+            "type": "string",
+            "description": "Display label for the dimension",
+            "example": "Area"
+          },
+          "parameter": {
+            "type": "string",
+            "description": "Query parameter name to use when filtering",
+            "example": "area"
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total number of members in this dimension"
+          }
+        }
+      },
+      "DimensionMembersResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DimensionMember"
+            }
+          }
+        }
+      },
+      "DimensionMember": {
+        "type": "object",
+        "properties": {
+          "Code": {
+            "type": "string",
+            "description": "Member code used in data queries",
+            "example": "5"
+          },
+          "Label": {
+            "type": "string",
+            "description": "Human-readable label for the member",
+            "example": "China"
+          }
+        }
+      },
+      "DataResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataRecord"
+            }
+          }
+        }
+      },
+      "DataRecord": {
+        "type": "object",
+        "description": "A single FAOSTAT statistical observation",
+        "properties": {
+          "Area Code": {
+            "type": "integer",
+            "description": "FAO numeric area code",
+            "example": 5
+          },
+          "Area Code (M49)": {
+            "type": "string",
+            "description": "M49 area code",
+            "example": "156"
+          },
+          "Area": {
+            "type": "string",
+            "description": "Area name",
+            "example": "China"
+          },
+          "Item Code": {
+            "type": "integer",
+            "description": "FAO item code",
+            "example": 15
+          },
+          "Item Code (CPC)": {
+            "type": "string",
+            "description": "CPC item code",
+            "example": "0111"
+          },
+          "Item": {
+            "type": "string",
+            "description": "Item name",
+            "example": "Wheat"
+          },
+          "Element Code": {
+            "type": "integer",
+            "description": "Element code",
+            "example": 5510
+          },
+          "Element": {
+            "type": "string",
+            "description": "Element name (statistical measure)",
+            "example": "Area harvested"
+          },
+          "Year Code": {
+            "type": "integer",
+            "description": "Numeric year code",
+            "example": 2020
+          },
+          "Year": {
+            "type": "integer",
+            "description": "Reference year",
+            "example": 2020
+          },
+          "Unit": {
+            "type": "string",
+            "description": "Unit of measurement",
+            "example": "ha"
+          },
+          "Value": {
+            "type": "number",
+            "nullable": true,
+            "description": "Observed statistical value",
+            "example": 23400000
+          },
+          "Flag": {
+            "type": "string",
+            "description": "Data quality/source flag code",
+            "example": "A"
+          },
+          "Flag Description": {
+            "type": "string",
+            "description": "Human-readable description of the flag",
+            "example": "Official figure"
+          },
+          "Note": {
+            "type": "string",
+            "nullable": true,
+            "description": "Additional notes for the observation"
+          }
+        }
+      },
+      "FlagListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Flag"
+            }
+          }
+        }
+      },
+      "Flag": {
+        "type": "object",
+        "properties": {
+          "Flag": {
+            "type": "string",
+            "description": "Flag code",
+            "example": "A"
+          },
+          "Description": {
+            "type": "string",
+            "description": "Flag description",
+            "example": "Official figure"
+          }
+        }
+      },
+      "AreaListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Area"
+            }
+          }
+        }
+      },
+      "Area": {
+        "type": "object",
+        "properties": {
+          "Area Code": {
+            "type": "integer",
+            "description": "FAO numeric area code",
+            "example": 5
+          },
+          "Area Code (M49)": {
+            "type": "string",
+            "description": "UN M49 area code",
+            "example": "156"
+          },
+          "Area Code (ISO2)": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code",
+            "example": "CN"
+          },
+          "Area Code (ISO3)": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-3 code",
+            "example": "CHN"
+          },
+          "Area": {
+            "type": "string",
+            "description": "Area name",
+            "example": "China"
+          }
+        }
+      },
+      "AreaDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Area"
+          }
+        ]
+      },
+      "DomainMetadata": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Metadata Element": {
+                  "type": "string",
+                  "description": "Metadata element name"
+                },
+                "Metadata": {
+                  "type": "string",
+                  "description": "Metadata content"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "code": {
+            "type": "integer",
+            "description": "Error code"
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request — invalid parameters",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Domain or resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "FAOSTAT Developer Portal",
+    "url": "https://www.fao.org/faostat/en/#developer-portal"
+  }
+}

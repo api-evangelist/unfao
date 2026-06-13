@@ -1,0 +1,71 @@
+{
+  "description": "Example FAOSTAT Data API response for wheat area harvested in China (2018-2020) from the Crops and Livestock Products domain (QCL). Request URL: GET /en/data/QCL?area=5&item=15&element=5510&year=2018,2019,2020&output_type=objects",
+  "request": {
+    "method": "GET",
+    "url": "https://fenixservices.fao.org/faostat/api/v1/en/data/QCL",
+    "parameters": {
+      "area": "5",
+      "item": "15",
+      "element": "5510",
+      "year": "2018,2019,2020",
+      "output_type": "objects",
+      "show_codes": "true",
+      "show_flags": "true"
+    }
+  },
+  "response": {
+    "data": [
+      {
+        "Area Code": 5,
+        "Area Code (M49)": "156",
+        "Area": "China",
+        "Item Code": 15,
+        "Item Code (CPC)": "0111",
+        "Item": "Wheat",
+        "Element Code": 5510,
+        "Element": "Area harvested",
+        "Year Code": 2018,
+        "Year": 2018,
+        "Unit": "ha",
+        "Value": 24268960,
+        "Flag": "A",
+        "Flag Description": "Official figure",
+        "Note": null
+      },
+      {
+        "Area Code": 5,
+        "Area Code (M49)": "156",
+        "Area": "China",
+        "Item Code": 15,
+        "Item Code (CPC)": "0111",
+        "Item": "Wheat",
+        "Element Code": 5510,
+        "Element": "Area harvested",
+        "Year Code": 2019,
+        "Year": 2019,
+        "Unit": "ha",
+        "Value": 23727990,
+        "Flag": "A",
+        "Flag Description": "Official figure",
+        "Note": null
+      },
+      {
+        "Area Code": 5,
+        "Area Code (M49)": "156",
+        "Area": "China",
+        "Item Code": 15,
+        "Item Code (CPC)": "0111",
+        "Item": "Wheat",
+        "Element Code": 5510,
+        "Element": "Area harvested",
+        "Year Code": 2020,
+        "Year": 2020,
+        "Unit": "ha",
+        "Value": 23341000,
+        "Flag": "A",
+        "Flag Description": "Official figure",
+        "Note": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "description": "Example response from the FAOSTAT groups and domains endpoint listing available domain groups and their child domains. Request URL: GET /en/groupsanddomains",
+  "request": {
+    "method": "GET",
+    "url": "https://fenixservices.fao.org/faostat/api/v1/en/groupsanddomains",
+    "parameters": {
+      "output_type": "objects"
+    }
+  },
+  "response": {
+    "data": [
+      {
+        "Group Code": "QC",
+        "Group Name": "Production",
+        "Domain Code": "QCL",
+        "Domain Name": "Crops and livestock products",
+        "Date Update": "2023-11-01"
+      },
+      {
+        "Group Code": "QC",
+        "Group Name": "Production",
+        "Domain Code": "QI",
+        "Domain Name": "Production indices",
+        "Date Update": "2023-11-01"
+      },
+      {
+        "Group Code": "QC",
+        "Group Name": "Production",
+        "Domain Code": "QV",
+        "Domain Name": "Value of agricultural production",
+        "Date Update": "2023-08-01"
+      },
+      {
+        "Group Code": "TM",
+        "Group Name": "Trade",
+        "Domain Code": "TCL",
+        "Domain Name": "Crops and livestock products",
+        "Date Update": "2023-09-01"
+      },
+      {
+        "Group Code": "TM",
+        "Group Name": "Trade",
+        "Domain Code": "TM",
+        "Domain Name": "Trade indices",
+        "Date Update": "2023-09-01"
+      },
+      {
+        "Group Code": "FS",
+        "Group Name": "Food Security and Nutrition",
+        "Domain Code": "FS",
+        "Domain Name": "Suite of Food Security Indicators",
+        "Date Update": "2023-10-01"
+      },
+      {
+        "Group Code": "FS",
+        "Group Name": "Food Security and Nutrition",
+        "Domain Code": "CAHORA",
+        "Domain Name": "Child anthropometry from household surveys",
+        "Date Update": "2023-05-01"
+      },
+      {
+        "Group Code": "RL",
+        "Group Name": "Land, Inputs and Sustainability",
+        "Domain Code": "RL",
+        "Domain Name": "Land Use",
+        "Date Update": "2023-07-01"
+      },
+      {
+        "Group Code": "RL",
+        "Group Name": "Land, Inputs and Sustainability",
+        "Domain Code": "RF",
+        "Domain Name": "Fertilizers by Nutrient",
+        "Date Update": "2023-06-01"
+      },
+      {
+        "Group Code": "RL",
+        "Group Name": "Land, Inputs and Sustainability",
+        "Domain Code": "RP",
+        "Domain Name": "Pesticides Use",
+        "Date Update": "2023-06-01"
+      },
+      {
+        "Group Code": "EA",
+        "Group Name": "Climate Change",
+        "Domain Code": "GT",
+        "Domain Name": "Temperature change on land",
+        "Date Update": "2023-05-01"
+      },
+      {
+        "Group Code": "EA",
+        "Group Name": "Climate Change",
+        "Domain Code": "GI",
+        "Domain Name": "Agrifood systems emissions",
+        "Date Update": "2023-10-01"
+      },
+      {
+        "Group Code": "FB",
+        "Group Name": "Food Balances",
+        "Domain Code": "FBS",
+        "Domain Name": "Food Balances (-2013, old methodology and population)",
+        "Date Update": "2022-03-01"
+      },
+      {
+        "Group Code": "FB",
+        "Group Name": "Food Balances",
+        "Domain Code": "FBSH",
+        "Domain Name": "Food Balances (2010-)",
+        "Date Update": "2023-09-01"
+      },
+      {
+        "Group Code": "PP",
+        "Group Name": "Prices",
+        "Domain Code": "PP",
+        "Domain Name": "Producer Prices",
+        "Date Update": "2023-08-01"
+      },
+      {
+        "Group Code": "PP",
+        "Group Name": "Prices",
+        "Domain Code": "IC",
+        "Domain Name": "Indicators from Household Surveys (gender, area, income classes)",
+        "Date Update": "2023-04-01"
+      },
+      {
+        "Group Code": "PA",
+        "Group Name": "Population and Employment",
+        "Domain Code": "OA",
+        "Domain Name": "Annual population",
+        "Date Update": "2023-09-01"
+      },
+      {
+        "Group Code": "PA",
+        "Group Name": "Population and Employment",
+        "Domain Code": "OE",
+        "Domain Name": "Employment indicators",
+        "Date Update": "2023-03-01"
+      }
+    ]
+  }
+}
