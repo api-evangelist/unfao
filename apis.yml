@@ -80,3 +80,6 @@ maintainers:
   - FN: Kin Lane
     X-twitter: kinlane
     email: kin@apievangelist.com
+common:
+- type: DomainSecurity
+  url: security/unfao-domain-security.yml
