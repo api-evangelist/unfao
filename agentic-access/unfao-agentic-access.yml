@@ -1,0 +1,124 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/faostat-bulk-api.json, openapi/faostat-data-api.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 11
+  by_action_class:
+    connected: 11
+  by_consequence:
+    read: 11
+  human_in_the_loop_required: 0
+operations:
+- path: /catalog.json
+  method: get
+  operationId: getCatalog
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{filename}
+  method: get
+  operationId: downloadDataset
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{lang}/groupsanddomains
+  method: get
+  operationId: getGroupsAndDomains
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{lang}/definitions/types/domain
+  method: get
+  operationId: getDomainList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{lang}/dimensions/{domain}
+  method: get
+  operationId: getDomainDimensions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{lang}/dimensions/{domain}/{dimension}
+  method: get
+  operationId: getDimensionMembers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{lang}/data/{domain}
+  method: get
+  operationId: getDomainData
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{lang}/definitions/types/flag
+  method: get
+  operationId: getFlags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{lang}/definitions/types/area
+  method: get
+  operationId: getAreaList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{lang}/definitions/types/area/{area_code}
+  method: get
+  operationId: getAreaDetail
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{lang}/metadata/{domain}
+  method: get
+  operationId: getDomainMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

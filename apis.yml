@@ -81,5 +81,7 @@ maintainers:
     X-twitter: kinlane
     email: kin@apievangelist.com
 common:
+- type: AgenticAccess
+  url: agentic-access/unfao-agentic-access.yml
 - type: DomainSecurity
   url: security/unfao-domain-security.yml
