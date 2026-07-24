@@ -1,0 +1,268 @@
+openapi: 3.0.3
+info:
+  title: FAOSTAT Bulk Download Catalog Dimensions API
+  description: The FAOSTAT Bulk Download API enables retrieval of complete FAOSTAT datasets as compressed CSV archives. Users can browse the dataset catalog to discover available datasets for any FAOSTAT domain, along with last-updated dates and direct download URLs for the zipped CSV files. No authentication is required.
+  version: 1.0.0
+  contact:
+    name: FAOSTAT Support
+    email: faostat@fao.org
+    url: https://www.fao.org/faostat/en/#data
+  license:
+    name: CC BY-NC-SA 3.0 IGO
+    url: https://creativecommons.org/licenses/by-nc-sa/3.0/igo/
+  termsOfService: https://www.fao.org/contact-us/terms/en/
+servers:
+- url: https://bulks-faostat.fao.org/production
+  description: FAOSTAT Bulk Download Production Server
+tags:
+- name: Dimensions
+  description: Operations for querying dimension members (areas, items, elements, years, flags)
+paths:
+  /{lang}/dimensions/{domain}:
+    get:
+      tags:
+      - Dimensions
+      operationId: getDomainDimensions
+      summary: Get dimensions available for a domain
+      description: Returns all available filter dimensions (area, item, element, year, flag) for a specific FAOSTAT domain.
+      parameters:
+      - $ref: '#/components/parameters/lang'
+      - $ref: '#/components/parameters/domain'
+      responses:
+        '200':
+          description: Successful response with dimension list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DimensionsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /{lang}/dimensions/{domain}/{dimension}:
+    get:
+      tags:
+      - Dimensions
+      operationId: getDimensionMembers
+      summary: Get members of a specific dimension
+      description: 'Returns all valid members (codes and labels) for a given dimension within a FAOSTAT domain. Use dimension codes: area, item, element, year, flag.'
+      parameters:
+      - $ref: '#/components/parameters/lang'
+      - $ref: '#/components/parameters/domain'
+      - name: dimension
+        in: path
+        required: true
+        description: Dimension name (area, item, element, year, flag)
+        schema:
+          type: string
+          enum:
+          - area
+          - item
+          - element
+          - year
+          - flag
+      - $ref: '#/components/parameters/output_type'
+      responses:
+        '200':
+          description: Successful response with dimension members
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DimensionMembersResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /{lang}/definitions/types/area:
+    get:
+      tags:
+      - Dimensions
+      operationId: getAreaList
+      summary: List all areas (countries and regions)
+      description: Returns all areas (countries, territories, and regional aggregates) available in FAOSTAT with their codes and names.
+      parameters:
+      - $ref: '#/components/parameters/lang'
+      responses:
+        '200':
+          description: Successful response with area list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AreaListResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /{lang}/definitions/types/area/{area_code}:
+    get:
+      tags:
+      - Dimensions
+      operationId: getAreaDetail
+      summary: Get details for a specific area
+      description: Returns detailed information for a specific area including its full name, ISO codes, and regional membership.
+      parameters:
+      - $ref: '#/components/parameters/lang'
+      - name: area_code
+        in: path
+        required: true
+        description: FAO area code (numeric)
+        schema:
+          type: integer
+        example: 5
+      responses:
+        '200':
+          description: Successful response with area detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AreaDetail'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    AreaDetail:
+      allOf:
+      - $ref: '#/components/schemas/Area'
+    DimensionMember:
+      type: object
+      properties:
+        Code:
+          type: string
+          description: Member code used in data queries
+          example: '5'
+        Label:
+          type: string
+          description: Human-readable label for the member
+          example: China
+    DimensionMembersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DimensionMember'
+    Area:
+      type: object
+      properties:
+        Area Code:
+          type: integer
+          description: FAO numeric area code
+          example: 5
+        Area Code (M49):
+          type: string
+          description: UN M49 area code
+          example: '156'
+        Area Code (ISO2):
+          type: string
+          description: ISO 3166-1 alpha-2 code
+          example: CN
+        Area Code (ISO3):
+          type: string
+          description: ISO 3166-1 alpha-3 code
+          example: CHN
+        Area:
+          type: string
+          description: Area name
+          example: China
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
+    Dimension:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Dimension identifier
+          example: area
+        label:
+          type: string
+          description: Display label for the dimension
+          example: Area
+        parameter:
+          type: string
+          description: Query parameter name to use when filtering
+          example: area
+        total:
+          type: integer
+          description: Total number of members in this dimension
+    DimensionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dimension'
+    AreaListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Area'
+  parameters:
+    domain:
+      name: domain
+      in: path
+      required: true
+      description: FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)
+      schema:
+        type: string
+      example: QCL
+    output_type:
+      name: output_type
+      in: query
+      description: 'Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)'
+      schema:
+        type: string
+        enum:
+        - objects
+        - arrays
+        - csv
+        default: objects
+    lang:
+      name: lang
+      in: path
+      required: true
+      description: Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)
+      schema:
+        type: string
+        enum:
+        - en
+        - es
+        - fr
+        - ar
+        - zh
+        - ru
+        default: en
+  responses:
+    NotFound:
+      description: Domain or resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+externalDocs:
+  description: FAOSTAT Data Download Page
+  url: https://www.fao.org/faostat/en/#data

@@ -1,0 +1,270 @@
+openapi: 3.0.3
+info:
+  title: FAOSTAT Bulk Download Catalog Data API
+  description: The FAOSTAT Bulk Download API enables retrieval of complete FAOSTAT datasets as compressed CSV archives. Users can browse the dataset catalog to discover available datasets for any FAOSTAT domain, along with last-updated dates and direct download URLs for the zipped CSV files. No authentication is required.
+  version: 1.0.0
+  contact:
+    name: FAOSTAT Support
+    email: faostat@fao.org
+    url: https://www.fao.org/faostat/en/#data
+  license:
+    name: CC BY-NC-SA 3.0 IGO
+    url: https://creativecommons.org/licenses/by-nc-sa/3.0/igo/
+  termsOfService: https://www.fao.org/contact-us/terms/en/
+servers:
+- url: https://bulks-faostat.fao.org/production
+  description: FAOSTAT Bulk Download Production Server
+tags:
+- name: Data
+  description: Operations for retrieving FAOSTAT statistical data
+paths:
+  /{lang}/data/{domain}:
+    get:
+      tags:
+      - Data
+      operationId: getDomainData
+      summary: Query data from a FAOSTAT domain
+      description: Retrieves statistical data records from a specific FAOSTAT domain. Multiple filter values can be comma-separated. Returns JSON or CSV depending on output_type. When no filters are provided, returns all data for the domain (may be large).
+      parameters:
+      - $ref: '#/components/parameters/lang'
+      - $ref: '#/components/parameters/domain'
+      - name: area
+        in: query
+        description: Comma-separated area codes (country/region codes, e.g. 5 for China). Use dimension endpoint to discover valid codes.
+        schema:
+          type: string
+        example: 5,106
+      - name: item
+        in: query
+        description: Comma-separated item codes (commodity codes, e.g. 15 for Wheat). Use dimension endpoint to discover valid codes.
+        schema:
+          type: string
+        example: 15,27
+      - name: element
+        in: query
+        description: Comma-separated element codes (statistical measure codes, e.g. 5510 for Area harvested). Use dimension endpoint to discover valid codes.
+        schema:
+          type: string
+        example: 5510,5312
+      - name: year
+        in: query
+        description: Comma-separated year values (e.g. 2020,2021,2022). Supports range notation.
+        schema:
+          type: string
+        example: 2020,2021
+      - name: year_start
+        in: query
+        description: Start year for a date range filter (inclusive).
+        schema:
+          type: integer
+          minimum: 1961
+        example: 2000
+      - name: year_end
+        in: query
+        description: End year for a date range filter (inclusive).
+        schema:
+          type: integer
+          minimum: 1961
+        example: 2022
+      - name: area_cs
+        in: query
+        description: 'Area code system to use: FAO (default) or ISO2, ISO3, M49.'
+        schema:
+          type: string
+          enum:
+          - FAO
+          - ISO2
+          - ISO3
+          - M49
+          default: FAO
+      - name: item_cs
+        in: query
+        description: 'Item code system to use: FAO (default) or CPC.'
+        schema:
+          type: string
+          enum:
+          - FAO
+          - CPC
+          default: FAO
+      - $ref: '#/components/parameters/output_type'
+      - name: null_values
+        in: query
+        description: Include null/missing values in the response (true or false).
+        schema:
+          type: boolean
+          default: false
+      - name: show_codes
+        in: query
+        description: Include dimension codes alongside labels in response (true or false).
+        schema:
+          type: boolean
+          default: true
+      - name: show_unit
+        in: query
+        description: Include unit of measurement in response (true or false).
+        schema:
+          type: boolean
+          default: true
+      - name: show_flags
+        in: query
+        description: Include data quality flags in response (true or false).
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Successful data response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+            text/csv:
+              schema:
+                type: string
+                description: CSV-formatted data (when output_type=csv)
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  parameters:
+    domain:
+      name: domain
+      in: path
+      required: true
+      description: FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)
+      schema:
+        type: string
+      example: QCL
+    output_type:
+      name: output_type
+      in: query
+      description: 'Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)'
+      schema:
+        type: string
+        enum:
+        - objects
+        - arrays
+        - csv
+        default: objects
+    lang:
+      name: lang
+      in: path
+      required: true
+      description: Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)
+      schema:
+        type: string
+        enum:
+        - en
+        - es
+        - fr
+        - ar
+        - zh
+        - ru
+        default: en
+  responses:
+    NotFound:
+      description: Domain or resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    DataResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataRecord'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
+    DataRecord:
+      type: object
+      description: A single FAOSTAT statistical observation
+      properties:
+        Area Code:
+          type: integer
+          description: FAO numeric area code
+          example: 5
+        Area Code (M49):
+          type: string
+          description: M49 area code
+          example: '156'
+        Area:
+          type: string
+          description: Area name
+          example: China
+        Item Code:
+          type: integer
+          description: FAO item code
+          example: 15
+        Item Code (CPC):
+          type: string
+          description: CPC item code
+          example: '0111'
+        Item:
+          type: string
+          description: Item name
+          example: Wheat
+        Element Code:
+          type: integer
+          description: Element code
+          example: 5510
+        Element:
+          type: string
+          description: Element name (statistical measure)
+          example: Area harvested
+        Year Code:
+          type: integer
+          description: Numeric year code
+          example: 2020
+        Year:
+          type: integer
+          description: Reference year
+          example: 2020
+        Unit:
+          type: string
+          description: Unit of measurement
+          example: ha
+        Value:
+          type: number
+          nullable: true
+          description: Observed statistical value
+          example: 23400000
+        Flag:
+          type: string
+          description: Data quality/source flag code
+          example: A
+        Flag Description:
+          type: string
+          description: Human-readable description of the flag
+          example: Official figure
+        Note:
+          type: string
+          nullable: true
+          description: Additional notes for the observation
+externalDocs:
+  description: FAOSTAT Data Download Page
+  url: https://www.fao.org/faostat/en/#data

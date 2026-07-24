@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: FAOSTAT Bulk Download Catalog Metadata API
+  description: The FAOSTAT Bulk Download API enables retrieval of complete FAOSTAT datasets as compressed CSV archives. Users can browse the dataset catalog to discover available datasets for any FAOSTAT domain, along with last-updated dates and direct download URLs for the zipped CSV files. No authentication is required.
+  version: 1.0.0
+  contact:
+    name: FAOSTAT Support
+    email: faostat@fao.org
+    url: https://www.fao.org/faostat/en/#data
+  license:
+    name: CC BY-NC-SA 3.0 IGO
+    url: https://creativecommons.org/licenses/by-nc-sa/3.0/igo/
+  termsOfService: https://www.fao.org/contact-us/terms/en/
+servers:
+- url: https://bulks-faostat.fao.org/production
+  description: FAOSTAT Bulk Download Production Server
+tags:
+- name: Metadata
+  description: Operations for retrieving dataset and indicator metadata
+paths:
+  /{lang}/definitions/types/flag:
+    get:
+      tags:
+      - Metadata
+      operationId: getFlags
+      summary: List all data quality flags
+      description: Returns all FAOSTAT data quality and source flags with their descriptions. Flags indicate whether data is official, estimated, calculated, FAO projection, etc.
+      parameters:
+      - $ref: '#/components/parameters/lang'
+      responses:
+        '200':
+          description: Successful response with flag definitions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlagListResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /{lang}/metadata/{domain}:
+    get:
+      tags:
+      - Metadata
+      operationId: getDomainMetadata
+      summary: Get metadata for a FAOSTAT domain
+      description: Returns descriptive metadata for a FAOSTAT domain including methodology, coverage, concepts, and data sources.
+      parameters:
+      - $ref: '#/components/parameters/lang'
+      - $ref: '#/components/parameters/domain'
+      responses:
+        '200':
+          description: Successful response with domain metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainMetadata'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    FlagListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Flag'
+    DomainMetadata:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              Metadata Element:
+                type: string
+                description: Metadata element name
+              Metadata:
+                type: string
+                description: Metadata content
+    Flag:
+      type: object
+      properties:
+        Flag:
+          type: string
+          description: Flag code
+          example: A
+        Description:
+          type: string
+          description: Flag description
+          example: Official figure
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
+  parameters:
+    domain:
+      name: domain
+      in: path
+      required: true
+      description: FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)
+      schema:
+        type: string
+      example: QCL
+    lang:
+      name: lang
+      in: path
+      required: true
+      description: Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)
+      schema:
+        type: string
+        enum:
+        - en
+        - es
+        - fr
+        - ar
+        - zh
+        - ru
+        default: en
+  responses:
+    NotFound:
+      description: Domain or resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+externalDocs:
+  description: FAOSTAT Data Download Page
+  url: https://www.fao.org/faostat/en/#data

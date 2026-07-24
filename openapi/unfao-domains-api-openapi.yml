@@ -1,0 +1,169 @@
+openapi: 3.0.3
+info:
+  title: FAOSTAT Bulk Download Catalog Domains API
+  description: The FAOSTAT Bulk Download API enables retrieval of complete FAOSTAT datasets as compressed CSV archives. Users can browse the dataset catalog to discover available datasets for any FAOSTAT domain, along with last-updated dates and direct download URLs for the zipped CSV files. No authentication is required.
+  version: 1.0.0
+  contact:
+    name: FAOSTAT Support
+    email: faostat@fao.org
+    url: https://www.fao.org/faostat/en/#data
+  license:
+    name: CC BY-NC-SA 3.0 IGO
+    url: https://creativecommons.org/licenses/by-nc-sa/3.0/igo/
+  termsOfService: https://www.fao.org/contact-us/terms/en/
+servers:
+- url: https://bulks-faostat.fao.org/production
+  description: FAOSTAT Bulk Download Production Server
+tags:
+- name: Domains
+  description: Operations for browsing available FAOSTAT domains and groups
+paths:
+  /{lang}/groupsanddomains:
+    get:
+      tags:
+      - Domains
+      operationId: getGroupsAndDomains
+      summary: List all domain groups and domains
+      description: Returns the complete hierarchical list of FAOSTAT domain groups and their child domains. Each domain has a unique code used in subsequent data queries.
+      parameters:
+      - $ref: '#/components/parameters/lang'
+      - $ref: '#/components/parameters/output_type'
+      responses:
+        '200':
+          description: Successful response with groups and domains list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupsAndDomainsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /{lang}/definitions/types/domain:
+    get:
+      tags:
+      - Domains
+      operationId: getDomainList
+      summary: List all available domains
+      description: Returns a flat list of all FAOSTAT domains with their codes, names, and last update information.
+      parameters:
+      - $ref: '#/components/parameters/lang'
+      responses:
+        '200':
+          description: Successful response with domain list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    Domain:
+      type: object
+      properties:
+        Domain Code:
+          type: string
+          description: Unique domain code
+          example: QCL
+        Domain Name:
+          type: string
+          description: Display name of the domain
+          example: Crops and livestock products
+        Date Update:
+          type: string
+          format: date
+          description: Last update date
+          example: '2023-11-01'
+    DomainListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Domain'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
+    DomainGroup:
+      type: object
+      properties:
+        Group Code:
+          type: string
+          description: Unique code for the domain group
+          example: QC
+        Group Name:
+          type: string
+          description: Display name of the domain group
+          example: Production
+        Domain Code:
+          type: string
+          description: Unique code for the domain
+          example: QCL
+        Domain Name:
+          type: string
+          description: Display name of the domain
+          example: Crops and livestock products
+        Date Update:
+          type: string
+          format: date
+          description: Date of last data update
+          example: '2023-11-01'
+    GroupsAndDomainsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainGroup'
+  parameters:
+    output_type:
+      name: output_type
+      in: query
+      description: 'Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)'
+      schema:
+        type: string
+        enum:
+        - objects
+        - arrays
+        - csv
+        default: objects
+    lang:
+      name: lang
+      in: path
+      required: true
+      description: Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)
+      schema:
+        type: string
+        enum:
+        - en
+        - es
+        - fr
+        - ar
+        - zh
+        - ru
+        default: en
+  responses:
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+externalDocs:
+  description: FAOSTAT Data Download Page
+  url: https://www.fao.org/faostat/en/#data
