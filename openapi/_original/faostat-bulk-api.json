@@ -1,0 +1,211 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FAOSTAT Bulk Download API",
+    "description": "The FAOSTAT Bulk Download API enables retrieval of complete FAOSTAT datasets as compressed CSV archives. Users can browse the dataset catalog to discover available datasets for any FAOSTAT domain, along with last-updated dates and direct download URLs for the zipped CSV files. No authentication is required.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "FAOSTAT Support",
+      "email": "faostat@fao.org",
+      "url": "https://www.fao.org/faostat/en/#data"
+    },
+    "license": {
+      "name": "CC BY-NC-SA 3.0 IGO",
+      "url": "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/"
+    },
+    "termsOfService": "https://www.fao.org/contact-us/terms/en/"
+  },
+  "servers": [
+    {
+      "url": "https://bulks-faostat.fao.org/production",
+      "description": "FAOSTAT Bulk Download Production Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Catalog",
+      "description": "Browse available bulk datasets"
+    },
+    {
+      "name": "Downloads",
+      "description": "Download complete domain datasets as ZIP archives"
+    }
+  ],
+  "paths": {
+    "/catalog.json": {
+      "get": {
+        "tags": ["Catalog"],
+        "operationId": "getCatalog",
+        "summary": "Get dataset catalog",
+        "description": "Returns a JSON catalog listing all available FAOSTAT datasets that can be bulk-downloaded. Each entry includes the domain code, dataset name, file URL, file size, and last updated date.",
+        "responses": {
+          "200": {
+            "description": "Successful catalog response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{filename}": {
+      "get": {
+        "tags": ["Downloads"],
+        "operationId": "downloadDataset",
+        "summary": "Download a bulk dataset ZIP file",
+        "description": "Downloads a complete FAOSTAT dataset as a compressed ZIP file containing one or more CSV files. Filenames are obtained from the catalog endpoint. Files may be several hundred megabytes for large domains.",
+        "parameters": [
+          {
+            "name": "filename",
+            "in": "path",
+            "required": true,
+            "description": "ZIP filename as listed in the catalog (e.g. Production_Crops_Livestock_E_All_Data_NOFLAG.zip)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Production_Crops_Livestock_E_All_Data_NOFLAG.zip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ZIP archive containing CSV data files",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary",
+                  "description": "Compressed ZIP file containing CSV data"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CatalogResponse": {
+        "type": "object",
+        "properties": {
+          "LastUpdate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last update timestamp for the catalog itself",
+            "example": "2023-11-01T00:00:00Z"
+          },
+          "Datasets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatasetEntry"
+            }
+          }
+        }
+      },
+      "DatasetEntry": {
+        "type": "object",
+        "description": "Metadata entry for a single bulk-downloadable FAOSTAT dataset",
+        "properties": {
+          "DatasetCode": {
+            "type": "string",
+            "description": "FAOSTAT domain code",
+            "example": "QCL"
+          },
+          "DatasetName": {
+            "type": "string",
+            "description": "Human-readable dataset/domain name",
+            "example": "Crops and livestock products"
+          },
+          "FileLocation": {
+            "type": "string",
+            "format": "uri",
+            "description": "Full URL for downloading the ZIP file",
+            "example": "https://bulks-faostat.fao.org/production/Production_Crops_Livestock_E_All_Data_NOFLAG.zip"
+          },
+          "DateUpdate": {
+            "type": "string",
+            "format": "date",
+            "description": "Date when the dataset was last updated",
+            "example": "2023-11-01"
+          },
+          "FileSize": {
+            "type": "string",
+            "description": "Human-readable file size",
+            "example": "45.2 MB"
+          },
+          "FileSizeBytes": {
+            "type": "integer",
+            "description": "File size in bytes",
+            "example": 47396700
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "code": {
+            "type": "integer",
+            "description": "Error code"
+          }
+        }
+      }
+    },
+    "responses": {
+      "Forbidden": {
+        "description": "Access denied",
+        "content": {
+          "application/xml": {
+            "schema": {
+              "type": "string",
+              "description": "XML error from S3-compatible storage"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Dataset file not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "FAOSTAT Data Download Page",
+    "url": "https://www.fao.org/faostat/en/#data"
+  }
+}

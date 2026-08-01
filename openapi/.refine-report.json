@@ -1,0 +1,24 @@
+{
+  "provider": "unfao",
+  "sources": [
+    "unfao-catalog-api-openapi.yml",
+    "unfao-data-api-openapi.yml",
+    "unfao-dimensions-api-openapi.yml",
+    "unfao-domains-api-openapi.yml",
+    "unfao-downloads-api-openapi.yml",
+    "unfao-metadata-api-openapi.yml"
+  ],
+  "outputs": [
+    "unfao-catalog-api-openapi.yml",
+    "unfao-data-api-openapi.yml",
+    "unfao-dimensions-api-openapi.yml",
+    "unfao-domains-api-openapi.yml",
+    "unfao-downloads-api-openapi.yml",
+    "unfao-metadata-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
