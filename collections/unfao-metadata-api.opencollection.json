@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FAOSTAT Bulk Download Catalog Metadata API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all data quality flags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bulks-faostat.fao.org/production/:lang/definitions/types/flag",
+            "params": [
+              {
+                "name": "lang",
+                "value": "",
+                "type": "path",
+                "description": "Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+              }
+            ]
+          },
+          "docs": "Returns all FAOSTAT data quality and source flags with their descriptions. Flags indicate whether data is official, estimated, calculated, FAO projection, etc."
+        },
+        {
+          "info": {
+            "name": "Get metadata for a FAOSTAT domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bulks-faostat.fao.org/production/:lang/metadata/:domain",
+            "params": [
+              {
+                "name": "lang",
+                "value": "",
+                "type": "path",
+                "description": "Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+              },
+              {
+                "name": "domain",
+                "value": "QCL",
+                "type": "path",
+                "description": "FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+              }
+            ]
+          },
+          "docs": "Returns descriptive metadata for a FAOSTAT domain including methodology, coverage, concepts, and data sources."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,137 @@
+{
+  "item": [
+    {
+      "id": "f67e846c-2d0c-43c9-8bec-a235c00a820e",
+      "name": "Catalog",
+      "description": {
+        "content": "Browse available bulk datasets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b6129500-d4df-41bd-8f2f-471956a02722",
+          "name": "Get dataset catalog",
+          "request": {
+            "name": "Get dataset catalog",
+            "description": {
+              "content": "Returns a JSON catalog listing all available FAOSTAT datasets that can be bulk-downloaded. Each entry includes the domain code, dataset name, file URL, file size, and last updated date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3154c847-b057-4270-adea-ca5c7c961d89",
+              "name": "Successful catalog response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"LastUpdate\": \"2023-11-01T00:00:00Z\",\n  \"Datasets\": [\n    {\n      \"DatasetCode\": \"QCL\",\n      \"DatasetName\": \"Crops and livestock products\",\n      \"FileLocation\": \"https://bulks-faostat.fao.org/production/Production_Crops_Livestock_E_All_Data_NOFLAG.zip\",\n      \"DateUpdate\": \"2023-11-01\",\n      \"FileSize\": \"45.2 MB\",\n      \"FileSizeBytes\": 47396700\n    },\n    {\n      \"DatasetCode\": \"QCL\",\n      \"DatasetName\": \"Crops and livestock products\",\n      \"FileLocation\": \"https://bulks-faostat.fao.org/production/Production_Crops_Livestock_E_All_Data_NOFLAG.zip\",\n      \"DateUpdate\": \"2023-11-01\",\n      \"FileSize\": \"45.2 MB\",\n      \"FileSizeBytes\": 47396700\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "282956d2-405c-437b-9158-4201d8833e97",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 4955\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://bulks-faostat.fao.org/production",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0e4a76de-b1c1-458b-8d1d-14e0ddd13273",
+    "name": "FAOSTAT Bulk Download Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The FAOSTAT Bulk Download API enables retrieval of complete FAOSTAT datasets as compressed CSV archives. Users can browse the dataset catalog to discover available datasets for any FAOSTAT domain, along with last-updated dates and direct download URLs for the zipped CSV files. No authentication is required.\n\nContact Support:\n Name: FAOSTAT Support\n Email: faostat@fao.org",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,973 @@
+{
+  "item": [
+    {
+      "id": "d005c7d9-f9a9-4dfa-a401-8906fc5f35bc",
+      "name": "Dimensions",
+      "description": {
+        "content": "Operations for querying dimension members (areas, items, elements, years, flags)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "71676c29-ed68-4d5a-a3c3-e776da8ae8b5",
+          "name": "Get dimensions available for a domain",
+          "request": {
+            "name": "Get dimensions available for a domain",
+            "description": {
+              "content": "Returns all available filter dimensions (area, item, element, year, flag) for a specific FAOSTAT domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":lang",
+                "dimensions",
+                ":domain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "en",
+                  "key": "lang",
+                  "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b87a806-3098-48d2-91c0-6c799f131d38",
+              "name": "Successful response with dimension list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "dimensions",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"area\",\n      \"label\": \"Area\",\n      \"parameter\": \"area\",\n      \"total\": 8274\n    },\n    {\n      \"id\": \"area\",\n      \"label\": \"Area\",\n      \"parameter\": \"area\",\n      \"total\": 7240\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83c7f64d-e206-4880-bc4d-c573c6524562",
+              "name": "Bad request — invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "dimensions",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 3367\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dd1d087-991b-46ae-8158-37db7e4298e2",
+              "name": "Domain or resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "dimensions",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 3367\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff10bd8d-8da4-4540-95bb-e80d82401b69",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "dimensions",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 3367\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "003c2a81-e0d3-4863-ac9e-4f4626c45eda",
+          "name": "Get members of a specific dimension",
+          "request": {
+            "name": "Get members of a specific dimension",
+            "description": {
+              "content": "Returns all valid members (codes and labels) for a given dimension within a FAOSTAT domain. Use dimension codes: area, item, element, year, flag.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":lang",
+                "dimensions",
+                ":domain",
+                ":dimension"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "output_type",
+                  "value": "objects",
+                  "description": "Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "en",
+                  "key": "lang",
+                  "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dimension",
+                  "description": "(Required) Dimension name (area, item, element, year, flag)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f8bedad-6493-4014-ad02-c886ae5c411b",
+              "name": "Successful response with dimension members",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "dimensions",
+                    ":domain",
+                    ":dimension"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output_type",
+                      "value": "objects"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dimension",
+                      "description": "(Required) Dimension name (area, item, element, year, flag)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"Code\": \"5\",\n      \"Label\": \"China\"\n    },\n    {\n      \"Code\": \"5\",\n      \"Label\": \"China\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9023e29f-9ac7-4d3f-bbbc-d16f2a482c11",
+              "name": "Bad request — invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "dimensions",
+                    ":domain",
+                    ":dimension"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output_type",
+                      "value": "objects"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dimension",
+                      "description": "(Required) Dimension name (area, item, element, year, flag)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 3367\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1287190-7f32-4dca-bb5a-65878e9c47a2",
+              "name": "Domain or resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "dimensions",
+                    ":domain",
+                    ":dimension"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output_type",
+                      "value": "objects"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dimension",
+                      "description": "(Required) Dimension name (area, item, element, year, flag)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 3367\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc52c628-44b5-4309-8844-5f64e3b41ccf",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "dimensions",
+                    ":domain",
+                    ":dimension"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output_type",
+                      "value": "objects"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dimension",
+                      "description": "(Required) Dimension name (area, item, element, year, flag)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 3367\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71028bdd-4a94-4bc0-87ca-7c5f4345f5e2",
+          "name": "List all areas (countries and regions)",
+          "request": {
+            "name": "List all areas (countries and regions)",
+            "description": {
+              "content": "Returns all areas (countries, territories, and regional aggregates) available in FAOSTAT with their codes and names.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":lang",
+                "definitions",
+                "types",
+                "area"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "en",
+                  "key": "lang",
+                  "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4545f81b-a9f2-4a4d-a996-6f367df913e8",
+              "name": "Successful response with area list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "definitions",
+                    "types",
+                    "area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"Area Code\": 5,\n      \"Area Code (M49)\": \"156\",\n      \"Area Code (ISO2)\": \"CN\",\n      \"Area Code (ISO3)\": \"CHN\",\n      \"Area\": \"China\"\n    },\n    {\n      \"Area Code\": 5,\n      \"Area Code (M49)\": \"156\",\n      \"Area Code (ISO2)\": \"CN\",\n      \"Area Code (ISO3)\": \"CHN\",\n      \"Area\": \"China\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ad99886-e1d5-4b7b-a94c-25e2208709fa",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "definitions",
+                    "types",
+                    "area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 3367\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b3bef2f-6faf-4204-80e8-a56213634d6e",
+          "name": "Get details for a specific area",
+          "request": {
+            "name": "Get details for a specific area",
+            "description": {
+              "content": "Returns detailed information for a specific area including its full name, ISO codes, and regional membership.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":lang",
+                "definitions",
+                "types",
+                "area",
+                ":area_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "en",
+                  "key": "lang",
+                  "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "area_code",
+                  "description": "(Required) FAO area code (numeric)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33b9d78f-13c1-4439-8df3-8e3424bc6a1c",
+              "name": "Successful response with area detail",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "definitions",
+                    "types",
+                    "area",
+                    ":area_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "area_code",
+                      "description": "(Required) FAO area code (numeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Area Code\": 5,\n  \"Area Code (M49)\": \"156\",\n  \"Area Code (ISO2)\": \"CN\",\n  \"Area Code (ISO3)\": \"CHN\",\n  \"Area\": \"China\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da357def-58f3-4ad5-b8b2-d0635a53d759",
+              "name": "Domain or resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "definitions",
+                    "types",
+                    "area",
+                    ":area_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "area_code",
+                      "description": "(Required) FAO area code (numeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 3367\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b716ac89-aba9-49c8-b8ec-c23e9eab6c71",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "definitions",
+                    "types",
+                    "area",
+                    ":area_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "area_code",
+                      "description": "(Required) FAO area code (numeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 3367\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://bulks-faostat.fao.org/production",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "073312ff-a7d7-44d0-bef9-bb269581951a",
+    "name": "FAOSTAT Bulk Download Catalog Dimensions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The FAOSTAT Bulk Download API enables retrieval of complete FAOSTAT datasets as compressed CSV archives. Users can browse the dataset catalog to discover available datasets for any FAOSTAT domain, along with last-updated dates and direct download URLs for the zipped CSV files. No authentication is required.\n\nContact Support:\n Name: FAOSTAT Support\n Email: faostat@fao.org",
+      "type": "text/plain"
+    }
+  }
+}

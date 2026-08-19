@@ -1,0 +1,247 @@
+{
+  "item": [
+    {
+      "id": "7104107d-dde3-45ee-8cf0-2cf42599a8fd",
+      "name": "Downloads",
+      "description": {
+        "content": "Download complete domain datasets as ZIP archives",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e4ad42c2-f6b2-43a6-8e03-456edb58eff8",
+          "name": "Download a bulk dataset ZIP file",
+          "request": {
+            "name": "Download a bulk dataset ZIP file",
+            "description": {
+              "content": "Downloads a complete FAOSTAT dataset as a compressed ZIP file containing one or more CSV files. Filenames are obtained from the catalog endpoint. Files may be several hundred megabytes for large domains.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":filename"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filename",
+                  "description": "(Required) ZIP filename as listed in the catalog (e.g. Production_Crops_Livestock_E_All_Data_NOFLAG.zip)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/zip"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a9cceb7-4335-417e-94e7-614b3bd2d6ec",
+              "name": "ZIP archive containing CSV data files",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":filename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) ZIP filename as listed in the catalog (e.g. Production_Crops_Livestock_E_All_Data_NOFLAG.zip)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/zip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/zip"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a43b5ea-bcc1-473a-ad6f-85bd45617f82",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":filename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) ZIP filename as listed in the catalog (e.g. Production_Crops_Livestock_E_All_Data_NOFLAG.zip)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "196d8865-a7be-4e9f-afcd-c3804792755e",
+              "name": "Dataset file not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":filename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) ZIP filename as listed in the catalog (e.g. Production_Crops_Livestock_E_All_Data_NOFLAG.zip)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 8943\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ab4c317-c564-4cc3-a498-b01b4aee77b9",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":filename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) ZIP filename as listed in the catalog (e.g. Production_Crops_Livestock_E_All_Data_NOFLAG.zip)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 8943\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://bulks-faostat.fao.org/production",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f0ea1e24-34dc-46dc-ac80-a6378dac904b",
+    "name": "FAOSTAT Bulk Download Catalog Downloads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The FAOSTAT Bulk Download API enables retrieval of complete FAOSTAT datasets as compressed CSV archives. Users can browse the dataset catalog to discover available datasets for any FAOSTAT domain, along with last-updated dates and direct download URLs for the zipped CSV files. No authentication is required.\n\nContact Support:\n Name: FAOSTAT Support\n Email: faostat@fao.org",
+      "type": "text/plain"
+    }
+  }
+}

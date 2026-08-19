@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FAOSTAT Bulk Download Catalog Downloads API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Downloads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download a bulk dataset ZIP file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bulks-faostat.fao.org/production/:filename",
+            "params": [
+              {
+                "name": "filename",
+                "value": "Production_Crops_Livestock_E_All_Data_NOFLAG.zip",
+                "type": "path",
+                "description": "ZIP filename as listed in the catalog (e.g. Production_Crops_Livestock_E_All_Data_NOFLAG.zip)"
+              }
+            ]
+          },
+          "docs": "Downloads a complete FAOSTAT dataset as a compressed ZIP file containing one or more CSV files. Filenames are obtained from the catalog endpoint. Files may be several hundred megabytes for large domains."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

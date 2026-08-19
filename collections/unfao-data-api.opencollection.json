@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FAOSTAT Bulk Download Catalog Data API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query data from a FAOSTAT domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bulks-faostat.fao.org/production/:lang/data/:domain",
+            "params": [
+              {
+                "name": "lang",
+                "value": "",
+                "type": "path",
+                "description": "Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+              },
+              {
+                "name": "domain",
+                "value": "QCL",
+                "type": "path",
+                "description": "FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+              },
+              {
+                "name": "area",
+                "value": "5,106",
+                "type": "query",
+                "description": "Comma-separated area codes (country/region codes, e.g. 5 for China). Use dimension endpoint to discover valid codes."
+              },
+              {
+                "name": "item",
+                "value": "15,27",
+                "type": "query",
+                "description": "Comma-separated item codes (commodity codes, e.g. 15 for Wheat). Use dimension endpoint to discover valid codes."
+              },
+              {
+                "name": "element",
+                "value": "5510,5312",
+                "type": "query",
+                "description": "Comma-separated element codes (statistical measure codes, e.g. 5510 for Area harvested). Use dimension endpoint to discover valid codes."
+              },
+              {
+                "name": "year",
+                "value": "2020,2021",
+                "type": "query",
+                "description": "Comma-separated year values (e.g. 2020,2021,2022). Supports range notation."
+              },
+              {
+                "name": "year_start",
+                "value": "2000",
+                "type": "query",
+                "description": "Start year for a date range filter (inclusive)."
+              },
+              {
+                "name": "year_end",
+                "value": "2022",
+                "type": "query",
+                "description": "End year for a date range filter (inclusive)."
+              },
+              {
+                "name": "area_cs",
+                "value": "",
+                "type": "query",
+                "description": "Area code system to use: FAO (default) or ISO2, ISO3, M49."
+              },
+              {
+                "name": "item_cs",
+                "value": "",
+                "type": "query",
+                "description": "Item code system to use: FAO (default) or CPC."
+              },
+              {
+                "name": "output_type",
+                "value": "",
+                "type": "query",
+                "description": "Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)"
+              },
+              {
+                "name": "null_values",
+                "value": "",
+                "type": "query",
+                "description": "Include null/missing values in the response (true or false)."
+              },
+              {
+                "name": "show_codes",
+                "value": "",
+                "type": "query",
+                "description": "Include dimension codes alongside labels in response (true or false)."
+              },
+              {
+                "name": "show_unit",
+                "value": "",
+                "type": "query",
+                "description": "Include unit of measurement in response (true or false)."
+              },
+              {
+                "name": "show_flags",
+                "value": "",
+                "type": "query",
+                "description": "Include data quality flags in response (true or false)."
+              }
+            ]
+          },
+          "docs": "Retrieves statistical data records from a specific FAOSTAT domain. Multiple filter values can be comma-separated. Returns JSON or CSV depending on output_type. When no filters are provided, returns all data for the domain (may be large)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

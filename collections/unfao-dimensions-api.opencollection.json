@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FAOSTAT Bulk Download Catalog Dimensions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dimensions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get dimensions available for a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bulks-faostat.fao.org/production/:lang/dimensions/:domain",
+            "params": [
+              {
+                "name": "lang",
+                "value": "",
+                "type": "path",
+                "description": "Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+              },
+              {
+                "name": "domain",
+                "value": "QCL",
+                "type": "path",
+                "description": "FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+              }
+            ]
+          },
+          "docs": "Returns all available filter dimensions (area, item, element, year, flag) for a specific FAOSTAT domain."
+        },
+        {
+          "info": {
+            "name": "Get members of a specific dimension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bulks-faostat.fao.org/production/:lang/dimensions/:domain/:dimension",
+            "params": [
+              {
+                "name": "lang",
+                "value": "",
+                "type": "path",
+                "description": "Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+              },
+              {
+                "name": "domain",
+                "value": "QCL",
+                "type": "path",
+                "description": "FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+              },
+              {
+                "name": "dimension",
+                "value": "",
+                "type": "path",
+                "description": "Dimension name (area, item, element, year, flag)"
+              },
+              {
+                "name": "output_type",
+                "value": "",
+                "type": "query",
+                "description": "Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)"
+              }
+            ]
+          },
+          "docs": "Returns all valid members (codes and labels) for a given dimension within a FAOSTAT domain. Use dimension codes: area, item, element, year, flag."
+        },
+        {
+          "info": {
+            "name": "List all areas (countries and regions)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bulks-faostat.fao.org/production/:lang/definitions/types/area",
+            "params": [
+              {
+                "name": "lang",
+                "value": "",
+                "type": "path",
+                "description": "Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+              }
+            ]
+          },
+          "docs": "Returns all areas (countries, territories, and regional aggregates) available in FAOSTAT with their codes and names."
+        },
+        {
+          "info": {
+            "name": "Get details for a specific area",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bulks-faostat.fao.org/production/:lang/definitions/types/area/:area_code",
+            "params": [
+              {
+                "name": "lang",
+                "value": "",
+                "type": "path",
+                "description": "Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+              },
+              {
+                "name": "area_code",
+                "value": "5",
+                "type": "path",
+                "description": "FAO area code (numeric)"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific area including its full name, ISO codes, and regional membership."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

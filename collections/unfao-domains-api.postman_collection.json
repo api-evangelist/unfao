@@ -1,0 +1,414 @@
+{
+  "item": [
+    {
+      "id": "197f236c-405a-463b-8fb4-f537eb7685ee",
+      "name": "Domains",
+      "description": {
+        "content": "Operations for browsing available FAOSTAT domains and groups",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4b1cd9a3-e47d-49c6-9299-a3a2f6cb6474",
+          "name": "List all domain groups and domains",
+          "request": {
+            "name": "List all domain groups and domains",
+            "description": {
+              "content": "Returns the complete hierarchical list of FAOSTAT domain groups and their child domains. Each domain has a unique code used in subsequent data queries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":lang",
+                "groupsanddomains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "output_type",
+                  "value": "objects",
+                  "description": "Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "en",
+                  "key": "lang",
+                  "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42dd0b88-52e9-4aa9-b7ac-e8c1297554f2",
+              "name": "Successful response with groups and domains list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "groupsanddomains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output_type",
+                      "value": "objects"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"Group Code\": \"QC\",\n      \"Group Name\": \"Production\",\n      \"Domain Code\": \"QCL\",\n      \"Domain Name\": \"Crops and livestock products\",\n      \"Date Update\": \"2023-11-01\"\n    },\n    {\n      \"Group Code\": \"QC\",\n      \"Group Name\": \"Production\",\n      \"Domain Code\": \"QCL\",\n      \"Domain Name\": \"Crops and livestock products\",\n      \"Date Update\": \"2023-11-01\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95d40ccb-87dc-4f82-a769-6ea438e26c14",
+              "name": "Bad request — invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "groupsanddomains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output_type",
+                      "value": "objects"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 6892\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06364620-987b-4161-91c8-cf27fe5548c6",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "groupsanddomains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "output_type",
+                      "value": "objects"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 6892\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74d4f9f0-5689-419b-8b97-569733384a0f",
+          "name": "List all available domains",
+          "request": {
+            "name": "List all available domains",
+            "description": {
+              "content": "Returns a flat list of all FAOSTAT domains with their codes, names, and last update information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":lang",
+                "definitions",
+                "types",
+                "domain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "en",
+                  "key": "lang",
+                  "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3a31908-75e1-4150-b354-4d4e5fd29a16",
+              "name": "Successful response with domain list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "definitions",
+                    "types",
+                    "domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"Domain Code\": \"QCL\",\n      \"Domain Name\": \"Crops and livestock products\",\n      \"Date Update\": \"2023-11-01\"\n    },\n    {\n      \"Domain Code\": \"QCL\",\n      \"Domain Name\": \"Crops and livestock products\",\n      \"Date Update\": \"2023-11-01\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24cefc4c-322b-4dc1-b7ce-f566b21c05c4",
+              "name": "Bad request — invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "definitions",
+                    "types",
+                    "domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 6892\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16647445-f5e6-4a84-82a3-788a79a94dd9",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "definitions",
+                    "types",
+                    "domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 6892\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://bulks-faostat.fao.org/production",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "060a6ba1-0d04-47db-b856-5f2ddcf50ede",
+    "name": "FAOSTAT Bulk Download Catalog Domains API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The FAOSTAT Bulk Download API enables retrieval of complete FAOSTAT datasets as compressed CSV archives. Users can browse the dataset catalog to discover available datasets for any FAOSTAT domain, along with last-updated dates and direct download URLs for the zipped CSV files. No authentication is required.\n\nContact Support:\n Name: FAOSTAT Support\n Email: faostat@fao.org",
+      "type": "text/plain"
+    }
+  }
+}

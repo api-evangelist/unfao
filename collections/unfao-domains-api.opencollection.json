@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FAOSTAT Bulk Download Catalog Domains API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all domain groups and domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bulks-faostat.fao.org/production/:lang/groupsanddomains",
+            "params": [
+              {
+                "name": "lang",
+                "value": "",
+                "type": "path",
+                "description": "Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+              },
+              {
+                "name": "output_type",
+                "value": "",
+                "type": "query",
+                "description": "Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)"
+              }
+            ]
+          },
+          "docs": "Returns the complete hierarchical list of FAOSTAT domain groups and their child domains. Each domain has a unique code used in subsequent data queries."
+        },
+        {
+          "info": {
+            "name": "List all available domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bulks-faostat.fao.org/production/:lang/definitions/types/domain",
+            "params": [
+              {
+                "name": "lang",
+                "value": "",
+                "type": "path",
+                "description": "Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+              }
+            ]
+          },
+          "docs": "Returns a flat list of all FAOSTAT domains with their codes, names, and last update information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,583 @@
+{
+  "item": [
+    {
+      "id": "903fd20c-eb0c-41bc-917c-9ee6cb8b14af",
+      "name": "Data",
+      "description": {
+        "content": "Operations for retrieving FAOSTAT statistical data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4513cf2e-e055-4e87-bd7d-ca76a0262562",
+          "name": "Query data from a FAOSTAT domain",
+          "request": {
+            "name": "Query data from a FAOSTAT domain",
+            "description": {
+              "content": "Retrieves statistical data records from a specific FAOSTAT domain. Multiple filter values can be comma-separated. Returns JSON or CSV depending on output_type. When no filters are provided, returns all data for the domain (may be large).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":lang",
+                "data",
+                ":domain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "area",
+                  "value": "<string>",
+                  "description": "Comma-separated area codes (country/region codes, e.g. 5 for China). Use dimension endpoint to discover valid codes."
+                },
+                {
+                  "disabled": false,
+                  "key": "item",
+                  "value": "<string>",
+                  "description": "Comma-separated item codes (commodity codes, e.g. 15 for Wheat). Use dimension endpoint to discover valid codes."
+                },
+                {
+                  "disabled": false,
+                  "key": "element",
+                  "value": "<string>",
+                  "description": "Comma-separated element codes (statistical measure codes, e.g. 5510 for Area harvested). Use dimension endpoint to discover valid codes."
+                },
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<string>",
+                  "description": "Comma-separated year values (e.g. 2020,2021,2022). Supports range notation."
+                },
+                {
+                  "disabled": false,
+                  "key": "year_start",
+                  "value": "<integer>",
+                  "description": "Start year for a date range filter (inclusive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "year_end",
+                  "value": "<integer>",
+                  "description": "End year for a date range filter (inclusive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "area_cs",
+                  "value": "FAO",
+                  "description": "Area code system to use: FAO (default) or ISO2, ISO3, M49."
+                },
+                {
+                  "disabled": false,
+                  "key": "item_cs",
+                  "value": "FAO",
+                  "description": "Item code system to use: FAO (default) or CPC."
+                },
+                {
+                  "disabled": false,
+                  "key": "output_type",
+                  "value": "objects",
+                  "description": "Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)"
+                },
+                {
+                  "disabled": false,
+                  "key": "null_values",
+                  "value": "false",
+                  "description": "Include null/missing values in the response (true or false)."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_codes",
+                  "value": "true",
+                  "description": "Include dimension codes alongside labels in response (true or false)."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_unit",
+                  "value": "true",
+                  "description": "Include unit of measurement in response (true or false)."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_flags",
+                  "value": "true",
+                  "description": "Include data quality flags in response (true or false)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "en",
+                  "key": "lang",
+                  "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fbe30763-e440-44d7-9e58-8dd9c746448d",
+              "name": "Successful data response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "data",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "area",
+                      "value": "5,106"
+                    },
+                    {
+                      "key": "item",
+                      "value": "15,27"
+                    },
+                    {
+                      "key": "element",
+                      "value": "5510,5312"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2020,2021"
+                    },
+                    {
+                      "key": "year_start",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "year_end",
+                      "value": "2022"
+                    },
+                    {
+                      "key": "area_cs",
+                      "value": "FAO"
+                    },
+                    {
+                      "key": "item_cs",
+                      "value": "FAO"
+                    },
+                    {
+                      "key": "output_type",
+                      "value": "objects"
+                    },
+                    {
+                      "key": "null_values",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show_codes",
+                      "value": "true"
+                    },
+                    {
+                      "key": "show_unit",
+                      "value": "true"
+                    },
+                    {
+                      "key": "show_flags",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"Area Code\": 5,\n      \"Area Code (M49)\": \"156\",\n      \"Area\": \"China\",\n      \"Item Code\": 15,\n      \"Item Code (CPC)\": \"0111\",\n      \"Item\": \"Wheat\",\n      \"Element Code\": 5510,\n      \"Element\": \"Area harvested\",\n      \"Year Code\": 2020,\n      \"Year\": 2020,\n      \"Unit\": \"ha\",\n      \"Value\": 23400000,\n      \"Flag\": \"A\",\n      \"Flag Description\": \"Official figure\",\n      \"Note\": \"string\"\n    },\n    {\n      \"Area Code\": 5,\n      \"Area Code (M49)\": \"156\",\n      \"Area\": \"China\",\n      \"Item Code\": 15,\n      \"Item Code (CPC)\": \"0111\",\n      \"Item\": \"Wheat\",\n      \"Element Code\": 5510,\n      \"Element\": \"Area harvested\",\n      \"Year Code\": 2020,\n      \"Year\": 2020,\n      \"Unit\": \"ha\",\n      \"Value\": 23400000,\n      \"Flag\": \"A\",\n      \"Flag Description\": \"Official figure\",\n      \"Note\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56320866-bf4d-4b12-a56d-1fe928511451",
+              "name": "Bad request — invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "data",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "area",
+                      "value": "5,106"
+                    },
+                    {
+                      "key": "item",
+                      "value": "15,27"
+                    },
+                    {
+                      "key": "element",
+                      "value": "5510,5312"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2020,2021"
+                    },
+                    {
+                      "key": "year_start",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "year_end",
+                      "value": "2022"
+                    },
+                    {
+                      "key": "area_cs",
+                      "value": "FAO"
+                    },
+                    {
+                      "key": "item_cs",
+                      "value": "FAO"
+                    },
+                    {
+                      "key": "output_type",
+                      "value": "objects"
+                    },
+                    {
+                      "key": "null_values",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show_codes",
+                      "value": "true"
+                    },
+                    {
+                      "key": "show_unit",
+                      "value": "true"
+                    },
+                    {
+                      "key": "show_flags",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 7416\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64f0c79d-4037-418c-8b9b-2619a4798fb0",
+              "name": "Domain or resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "data",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "area",
+                      "value": "5,106"
+                    },
+                    {
+                      "key": "item",
+                      "value": "15,27"
+                    },
+                    {
+                      "key": "element",
+                      "value": "5510,5312"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2020,2021"
+                    },
+                    {
+                      "key": "year_start",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "year_end",
+                      "value": "2022"
+                    },
+                    {
+                      "key": "area_cs",
+                      "value": "FAO"
+                    },
+                    {
+                      "key": "item_cs",
+                      "value": "FAO"
+                    },
+                    {
+                      "key": "output_type",
+                      "value": "objects"
+                    },
+                    {
+                      "key": "null_values",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show_codes",
+                      "value": "true"
+                    },
+                    {
+                      "key": "show_unit",
+                      "value": "true"
+                    },
+                    {
+                      "key": "show_flags",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 7416\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "196ee48f-7707-4973-96a4-67c9567cfb70",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":lang",
+                    "data",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "area",
+                      "value": "5,106"
+                    },
+                    {
+                      "key": "item",
+                      "value": "15,27"
+                    },
+                    {
+                      "key": "element",
+                      "value": "5510,5312"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2020,2021"
+                    },
+                    {
+                      "key": "year_start",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "year_end",
+                      "value": "2022"
+                    },
+                    {
+                      "key": "area_cs",
+                      "value": "FAO"
+                    },
+                    {
+                      "key": "item_cs",
+                      "value": "FAO"
+                    },
+                    {
+                      "key": "output_type",
+                      "value": "objects"
+                    },
+                    {
+                      "key": "null_values",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show_codes",
+                      "value": "true"
+                    },
+                    {
+                      "key": "show_unit",
+                      "value": "true"
+                    },
+                    {
+                      "key": "show_flags",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "en",
+                      "key": "lang",
+                      "description": "(Required) Response language code (en=English, es=Spanish, fr=French, ar=Arabic, zh=Chinese, ru=Russian)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": 7416\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://bulks-faostat.fao.org/production",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e263018d-a93e-4f34-b7f2-114dc9859d94",
+    "name": "FAOSTAT Bulk Download Catalog Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The FAOSTAT Bulk Download API enables retrieval of complete FAOSTAT datasets as compressed CSV archives. Users can browse the dataset catalog to discover available datasets for any FAOSTAT domain, along with last-updated dates and direct download URLs for the zipped CSV files. No authentication is required.\n\nContact Support:\n Name: FAOSTAT Support\n Email: faostat@fao.org",
+      "type": "text/plain"
+    }
+  }
+}

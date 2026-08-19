@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FAOSTAT Bulk Download Catalog API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get dataset catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://bulks-faostat.fao.org/production/catalog.json"
+          },
+          "docs": "Returns a JSON catalog listing all available FAOSTAT datasets that can be bulk-downloaded. Each entry includes the domain code, dataset name, file URL, file size, and last updated date."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
