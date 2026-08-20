@@ -20,6 +20,15 @@ accessModel:
   method: derived
 image: https://www.fao.org/favicon.ico
 tags:
+  - Agriculture
+  - food security
+  - Statistics
+  - Trade
+  - Land Use
+  - Environment
+  - UN
+  - Open Data
+tags_raw:
   - agriculture
   - food security
   - statistics
@@ -41,6 +50,11 @@ apis:
   humanURL: https://www.fao.org/faostat/en/#data
   baseURL: https://bulks-faostat.fao.org/production
   tags:
+  - Bulk Download
+  - Datasets
+  - Agriculture
+  - food statistics
+  tags_raw:
   - bulk download
   - datasets
   - agriculture
