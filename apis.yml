@@ -6,6 +6,18 @@ description: >
   food security indicators, trade flows, land use, environmental indicators, food
   balances, and prices covering 180+ countries from 1961 to present across 70+
   thematic domains.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: unknown
