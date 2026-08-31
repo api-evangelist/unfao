@@ -33,13 +33,13 @@ accessModel:
 image: https://www.fao.org/favicon.ico
 tags:
   - Agriculture
-  - food security
+  - Food Security
   - Statistics
   - Trade
-  - Land Use
-  - Environment
+  - land use
+  - environment
   - UN
-  - Open Data
+  - open data
 tags_raw:
   - agriculture
   - food security
@@ -62,7 +62,7 @@ apis:
   humanURL: https://www.fao.org/faostat/en/#data
   baseURL: https://bulks-faostat.fao.org/production
   tags:
-  - Bulk Download
+  - bulk download
   - Datasets
   - Agriculture
   - food statistics
