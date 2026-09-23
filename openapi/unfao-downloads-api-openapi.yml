@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: FAOSTAT Bulk Download Catalog Downloads API
+  title: FAOSTAT Bulk Download Downloads API
   description: The FAOSTAT Bulk Download API enables retrieval of complete FAOSTAT datasets as compressed CSV archives. Users can browse the dataset catalog to discover available datasets for any FAOSTAT domain, along with last-updated dates and direct download URLs for the zipped CSV files. No authentication is required.
   version: 1.0.0
   contact:
@@ -50,6 +50,13 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
+    Forbidden:
+      description: Access denied
+      content:
+        application/xml:
+          schema:
+            type: string
+            description: XML error from S3-compatible storage
     NotFound:
       description: Dataset file not found
       content:
@@ -62,13 +69,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Access denied
-      content:
-        application/xml:
-          schema:
-            type: string
-            description: XML error from S3-compatible storage
   schemas:
     ErrorResponse:
       type: object

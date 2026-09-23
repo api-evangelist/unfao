@@ -1,24 +1,32 @@
 {
   "provider": "unfao",
   "sources": [
-    "unfao-catalog-api-openapi.yml",
-    "unfao-data-api-openapi.yml",
-    "unfao-dimensions-api-openapi.yml",
-    "unfao-domains-api-openapi.yml",
-    "unfao-downloads-api-openapi.yml",
-    "unfao-metadata-api-openapi.yml"
+    "_original/faostat-bulk-api.json",
+    "_original/faostat-data-api.json"
   ],
   "outputs": [
     "unfao-catalog-api-openapi.yml",
+    "unfao-downloads-api-openapi.yml",
     "unfao-data-api-openapi.yml",
     "unfao-dimensions-api-openapi.yml",
     "unfao-domains-api-openapi.yml",
-    "unfao-downloads-api-openapi.yml",
     "unfao-metadata-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "faostat-bulk-api.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "faostat-data-api.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "unfao-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unfao-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unfao-dimensions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unfao-domains-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unfao-downloads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unfao-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
