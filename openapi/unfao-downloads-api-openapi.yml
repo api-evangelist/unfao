@@ -49,26 +49,6 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    Forbidden:
-      description: Access denied
-      content:
-        application/xml:
-          schema:
-            type: string
-            description: XML error from S3-compatible storage
-    NotFound:
-      description: Dataset file not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorResponse:
       type: object
@@ -79,6 +59,26 @@ components:
         code:
           type: integer
           description: Error code
+  responses:
+    NotFound:
+      description: Dataset file not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Access denied
+      content:
+        application/xml:
+          schema:
+            type: string
+            description: XML error from S3-compatible storage
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 externalDocs:
   description: FAOSTAT Data Download Page
   url: https://www.fao.org/faostat/en/#data

@@ -48,6 +48,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DatasetEntry'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
     DatasetEntry:
       type: object
       description: Metadata entry for a single bulk-downloadable FAOSTAT dataset
@@ -78,15 +87,6 @@ components:
           type: integer
           description: File size in bytes
           example: 47396700
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        code:
-          type: integer
-          description: Error code
   responses:
     InternalServerError:
       description: Internal server error

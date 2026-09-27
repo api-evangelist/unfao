@@ -58,6 +58,61 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  responses:
+    NotFound:
+      description: Domain or resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    Flag:
+      type: object
+      properties:
+        Flag:
+          type: string
+          description: Flag code
+          example: A
+        Description:
+          type: string
+          description: Flag description
+          example: Official figure
+    FlagListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Flag'
+    DomainMetadata:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              Metadata Element:
+                type: string
+                description: Metadata element name
+              Metadata:
+                type: string
+                description: Metadata content
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
   parameters:
     domain:
       name: domain
@@ -82,61 +137,6 @@ components:
         - zh
         - ru
         default: en
-  schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        code:
-          type: integer
-          description: Error code
-    DomainMetadata:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              Metadata Element:
-                type: string
-                description: Metadata element name
-              Metadata:
-                type: string
-                description: Metadata content
-    FlagListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Flag'
-    Flag:
-      type: object
-      properties:
-        Flag:
-          type: string
-          description: Flag code
-          example: A
-        Description:
-          type: string
-          description: Flag description
-          example: Official figure
-  responses:
-    NotFound:
-      description: Domain or resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
 externalDocs:
   description: FAOSTAT Developer Portal
   url: https://www.fao.org/faostat/en/#developer-portal

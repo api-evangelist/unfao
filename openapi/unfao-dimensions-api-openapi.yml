@@ -123,7 +123,44 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  responses:
+    NotFound:
+      description: Domain or resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    Dimension:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Dimension identifier
+          example: area
+        label:
+          type: string
+          description: Display label for the dimension
+          example: Area
+        parameter:
+          type: string
+          description: Query parameter name to use when filtering
+          example: area
+        total:
+          type: integer
+          description: Total number of members in this dimension
     Area:
       type: object
       properties:
@@ -147,15 +184,6 @@ components:
           type: string
           description: Area name
           example: China
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        code:
-          type: integer
-          description: Error code
     AreaListResponse:
       type: object
       properties:
@@ -163,13 +191,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Area'
-    DimensionMembersResponse:
+    DimensionsResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/DimensionMember'
+            $ref: '#/components/schemas/Dimension'
     DimensionMember:
       type: object
       properties:
@@ -181,53 +209,25 @@ components:
           type: string
           description: Human-readable label for the member
           example: China
-    DimensionsResponse:
+    AreaDetail:
+      allOf:
+      - $ref: '#/components/schemas/Area'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
+    DimensionMembersResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Dimension'
-    AreaDetail:
-      allOf:
-      - $ref: '#/components/schemas/Area'
-    Dimension:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Dimension identifier
-          example: area
-        label:
-          type: string
-          description: Display label for the dimension
-          example: Area
-        parameter:
-          type: string
-          description: Query parameter name to use when filtering
-          example: area
-        total:
-          type: integer
-          description: Total number of members in this dimension
-  responses:
-    BadRequest:
-      description: Bad request — invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Domain or resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/DimensionMember'
   parameters:
     domain:
       name: domain
@@ -237,17 +237,6 @@ components:
       schema:
         type: string
       example: QCL
-    output_type:
-      name: output_type
-      in: query
-      description: 'Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)'
-      schema:
-        type: string
-        enum:
-        - objects
-        - arrays
-        - csv
-        default: objects
     lang:
       name: lang
       in: path
@@ -263,6 +252,17 @@ components:
         - zh
         - ru
         default: en
+    output_type:
+      name: output_type
+      in: query
+      description: 'Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)'
+      schema:
+        type: string
+        enum:
+        - objects
+        - arrays
+        - csv
+        default: objects
 externalDocs:
   description: FAOSTAT Developer Portal
   url: https://www.fao.org/faostat/en/#developer-portal
