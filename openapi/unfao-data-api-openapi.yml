@@ -136,14 +136,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
+    BadRequest:
+      description: Bad request — invalid parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid parameters
+    InternalServerError:
+      description: Internal server error
       content:
         application/json:
           schema:
@@ -157,6 +157,17 @@ components:
       schema:
         type: string
       example: QCL
+    output_type:
+      name: output_type
+      in: query
+      description: 'Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)'
+      schema:
+        type: string
+        enum:
+        - objects
+        - arrays
+        - csv
+        default: objects
     lang:
       name: lang
       in: path
@@ -172,18 +183,16 @@ components:
         - zh
         - ru
         default: en
-    output_type:
-      name: output_type
-      in: query
-      description: 'Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)'
-      schema:
-        type: string
-        enum:
-        - objects
-        - arrays
-        - csv
-        default: objects
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
     DataRecord:
       type: object
       description: A single FAOSTAT statistical observation
@@ -258,15 +267,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataRecord'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        code:
-          type: integer
-          description: Error code
 externalDocs:
   description: FAOSTAT Developer Portal
   url: https://www.fao.org/faostat/en/#developer-portal

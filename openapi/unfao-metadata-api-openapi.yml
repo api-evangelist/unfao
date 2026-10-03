@@ -72,17 +72,6 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    Flag:
-      type: object
-      properties:
-        Flag:
-          type: string
-          description: Flag code
-          example: A
-        Description:
-          type: string
-          description: Flag description
-          example: Official figure
     FlagListResponse:
       type: object
       properties:
@@ -113,6 +102,17 @@ components:
         code:
           type: integer
           description: Error code
+    Flag:
+      type: object
+      properties:
+        Flag:
+          type: string
+          description: Flag code
+          example: A
+        Description:
+          type: string
+          description: Flag description
+          example: Official figure
   parameters:
     domain:
       name: domain

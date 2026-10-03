@@ -36,27 +36,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    CatalogResponse:
-      type: object
-      properties:
-        LastUpdate:
-          type: string
-          format: date-time
-          description: Last update timestamp for the catalog itself
-          example: '2023-11-01T00:00:00Z'
-        Datasets:
-          type: array
-          items:
-            $ref: '#/components/schemas/DatasetEntry'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        code:
-          type: integer
-          description: Error code
     DatasetEntry:
       type: object
       description: Metadata entry for a single bulk-downloadable FAOSTAT dataset
@@ -87,6 +66,27 @@ components:
           type: integer
           description: File size in bytes
           example: 47396700
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
+    CatalogResponse:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          format: date-time
+          description: Last update timestamp for the catalog itself
+          example: '2023-11-01T00:00:00Z'
+        Datasets:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatasetEntry'
   responses:
     InternalServerError:
       description: Internal server error

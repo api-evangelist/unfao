@@ -68,13 +68,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Domain'
-    GroupsAndDomainsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DomainGroup'
     DomainGroup:
       type: object
       properties:
@@ -99,6 +92,13 @@ components:
           format: date
           description: Date of last data update
           example: '2023-11-01'
+    GroupsAndDomainsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainGroup'
     Domain:
       type: object
       properties:
@@ -125,19 +125,30 @@ components:
           type: integer
           description: Error code
   responses:
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     BadRequest:
       description: Bad request — invalid parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    output_type:
+      name: output_type
+      in: query
+      description: 'Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)'
+      schema:
+        type: string
+        enum:
+        - objects
+        - arrays
+        - csv
+        default: objects
     lang:
       name: lang
       in: path
@@ -153,17 +164,6 @@ components:
         - zh
         - ru
         default: en
-    output_type:
-      name: output_type
-      in: query
-      description: 'Response format: objects (default, JSON array of objects) or arrays (JSON array of arrays) or csv (CSV text)'
-      schema:
-        type: string
-        enum:
-        - objects
-        - arrays
-        - csv
-        default: objects
 externalDocs:
   description: FAOSTAT Developer Portal
   url: https://www.fao.org/faostat/en/#developer-portal
