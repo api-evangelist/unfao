@@ -72,6 +72,26 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
+    Flag:
+      type: object
+      properties:
+        Flag:
+          type: string
+          description: Flag code
+          example: A
+        Description:
+          type: string
+          description: Flag description
+          example: Official figure
     FlagListResponse:
       type: object
       properties:
@@ -93,35 +113,7 @@ components:
               Metadata:
                 type: string
                 description: Metadata content
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        code:
-          type: integer
-          description: Error code
-    Flag:
-      type: object
-      properties:
-        Flag:
-          type: string
-          description: Flag code
-          example: A
-        Description:
-          type: string
-          description: Flag description
-          example: Official figure
   parameters:
-    domain:
-      name: domain
-      in: path
-      required: true
-      description: FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)
-      schema:
-        type: string
-      example: QCL
     lang:
       name: lang
       in: path
@@ -137,6 +129,14 @@ components:
         - zh
         - ru
         default: en
+    domain:
+      name: domain
+      in: path
+      required: true
+      description: FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)
+      schema:
+        type: string
+      example: QCL
 externalDocs:
   description: FAOSTAT Developer Portal
   url: https://www.fao.org/faostat/en/#developer-portal
