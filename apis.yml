@@ -202,6 +202,12 @@ maintainers:
     X-twitter: kinlane
     email: kin@apievangelist.com
 common:
+- type: Plans
+  url: plans/plans.yml
+- type: RateLimits
+  url: rate-limits/rate-limits.yml
+- type: FinOps
+  url: finops/finops.yml
 - type: AgenticAccess
   url: agentic-access/unfao-agentic-access.yml
 - type: DomainSecurity
