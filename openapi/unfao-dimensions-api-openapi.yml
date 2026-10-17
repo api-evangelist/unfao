@@ -124,6 +124,65 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
+    AreaListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Area'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
+    Dimension:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Dimension identifier
+          example: area
+        label:
+          type: string
+          description: Display label for the dimension
+          example: Area
+        parameter:
+          type: string
+          description: Query parameter name to use when filtering
+          example: area
+        total:
+          type: integer
+          description: Total number of members in this dimension
+    DimensionMembersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DimensionMember'
+    DimensionMember:
+      type: object
+      properties:
+        Code:
+          type: string
+          description: Member code used in data queries
+          example: '5'
+        Label:
+          type: string
+          description: Human-readable label for the member
+          example: China
+    DimensionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dimension'
     Area:
       type: object
       properties:
@@ -147,87 +206,9 @@ components:
           type: string
           description: Area name
           example: China
-    Dimension:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Dimension identifier
-          example: area
-        label:
-          type: string
-          description: Display label for the dimension
-          example: Area
-        parameter:
-          type: string
-          description: Query parameter name to use when filtering
-          example: area
-        total:
-          type: integer
-          description: Total number of members in this dimension
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        code:
-          type: integer
-          description: Error code
-    DimensionMember:
-      type: object
-      properties:
-        Code:
-          type: string
-          description: Member code used in data queries
-          example: '5'
-        Label:
-          type: string
-          description: Human-readable label for the member
-          example: China
-    DimensionsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Dimension'
-    AreaListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Area'
-    DimensionMembersResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DimensionMember'
     AreaDetail:
       allOf:
       - $ref: '#/components/schemas/Area'
-  responses:
-    NotFound:
-      description: Domain or resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     output_type:
       name: output_type
@@ -240,6 +221,14 @@ components:
         - arrays
         - csv
         default: objects
+    domain:
+      name: domain
+      in: path
+      required: true
+      description: FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)
+      schema:
+        type: string
+      example: QCL
     lang:
       name: lang
       in: path
@@ -255,14 +244,25 @@ components:
         - zh
         - ru
         default: en
-    domain:
-      name: domain
-      in: path
-      required: true
-      description: FAOSTAT domain code (e.g. QCL for Crops and livestock products, TM for Trade, RL for Land Use)
-      schema:
-        type: string
-      example: QCL
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Domain or resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 externalDocs:
   description: FAOSTAT Developer Portal
   url: https://www.fao.org/faostat/en/#developer-portal
