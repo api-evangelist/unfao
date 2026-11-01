@@ -64,55 +64,110 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-APIs.json 0.19 provider profile for the Food and Agriculture Organization (FAO) of the United Nations — FAOSTAT statistical database.
+The Food and Agriculture Organization (FAO) of the United Nations operates FAOSTAT, the world's largest freely accessible database for food and agriculture statistics. FAOSTAT provides REST APIs for programmatic access to agricultural production data, food security indicators, trade flows, land use, environmental indicators, food balances, and prices covering 180+ countries from 1961 to present across 70+ thematic domains.
 
-## Overview
+**Areas:** Agriculture · Food Security · Statistics · Trade · Land Use · Environment · UN · Open Data
 
-FAOSTAT is the world's largest freely accessible database for food and agriculture statistics, maintained by the UN Food and Agriculture Organization. It covers 180+ countries with data from 1961 to the present across 70+ thematic domains.
+## FAO FAOSTAT on APIs.io
 
-## APIs
+Everything profiled for FAO FAOSTAT is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/unfao/](https://apis.io/providers/unfao/)** — or go straight to one of the APIs or properties below.
 
-### FAOSTAT Data API
+### APIs (7)
 
-Base URL: `https://fenixservices.fao.org/faostat/api/v1`
+- [FAOSTAT Bulk Download API](https://apis.io/apis/unfao/faostat-bulk-download-api/) — API for bulk downloading complete datasets for any FAOSTAT domain as zipped CSV files. The catalog endpoint lists all available datasets with download URLs…
+- [FAO FAOSTAT Catalog API](https://apis.io/apis/unfao/unfao-catalog-api/) — Browse available bulk datasets
+- [FAO FAOSTAT Data API](https://apis.io/apis/unfao/unfao-data-api/) — Operations for retrieving FAOSTAT statistical data
+- [FAO FAOSTAT Dimensions API](https://apis.io/apis/unfao/unfao-dimensions-api/) — Operations for querying dimension members (areas, items, elements, years, flags)
+- [FAO FAOSTAT Domains API](https://apis.io/apis/unfao/unfao-domains-api/) — Operations for browsing available FAOSTAT domains and groups
+- [FAO FAOSTAT Downloads API](https://apis.io/apis/unfao/unfao-downloads-api/) — Download complete domain datasets as ZIP archives
+- [FAO FAOSTAT Metadata API](https://apis.io/apis/unfao/unfao-metadata-api/) — Operations for retrieving dataset and indicator metadata
 
-No authentication required. Returns JSON or CSV.
+### Published properties
 
-Key endpoint patterns:
-- `GET /en/groupsanddomains` — list all domain groups and datasets
-- `GET /en/definitions/domain/{domain_code}` — metadata for a specific domain
-- `GET /en/data/{domain_code}?area=...&item=...&element=...&year=...` — query data
-- `GET /en/definitions/types` — list available dimension types
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Example domains:
-| Code | Description |
-|------|-------------|
-| QCL | Production: Crops and livestock products |
-| FBS | Food Balances (2010-) |
-| FS | Food Security and Nutrition Indicators |
-| TCL | Trade: Crops and livestock products |
-| RL | Land Use |
-| EI | Agri-Environmental Indicators: Emissions |
-| BE | Bioenergy |
-| CP | Consumer Price Indices |
-| CAHD | Cost and Affordability of a Healthy Diet |
+#### Agentic access (1)
 
-### FAOSTAT Bulk Download API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Base URL: `https://bulks-faostat.fao.org/production`
+- [Unfao Agentic Access](https://apis.io/agentic-access/unfao/unfao-agentic-access/)
 
-- `GET /datasets_E.json` — catalog of all datasets with download URLs and update dates
-- `GET /{DatasetName}_E_All_Data_(Normalized).zip` — full normalized dataset download
+#### JSON Schema (2)
 
-## Developer Portal
+The data models the API reads and writes.
 
-https://www.fao.org/faostat/en/#developer-portal
+- [FAOSTAT Data Record](https://apis.io/schemas/unfao/data-record/)
+- [FAOSTAT Domain](https://apis.io/schemas/unfao/domain/)
 
-## Contact
+#### JSON-LD (2)
 
-- Email: faostat@fao.org
-- Twitter: @FAOstatistics
+Linked-data contexts for the provider's vocabulary.
 
-## License
+- [Faostat Context](https://apis.io/jsonld/unfao/faostat-context/)
+- [Faostat Dataset Context](https://apis.io/jsonld/unfao/faostat-dataset/)
 
-Data provided under FAO's open data license. No cost. No API key required.
+#### Examples (2)
+
+Example requests and responses.
+
+- [Data Query Crops](https://apis.io/examples/unfao/data-query-crops/)
+- [Domains List](https://apis.io/examples/unfao/domains-list/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [FAOSTAT Bulk Download Catalog API](https://apis.io/collections/unfao/open-unfao-catalog-api/)
+- [FAOSTAT Bulk Download Catalog Data API](https://apis.io/collections/unfao/open-unfao-data-api/)
+- [FAOSTAT Bulk Download Catalog Dimensions API](https://apis.io/collections/unfao/open-unfao-dimensions-api/)
+- [FAOSTAT Bulk Download Catalog Domains API](https://apis.io/collections/unfao/open-unfao-domains-api/)
+- [FAOSTAT Bulk Download Catalog Downloads API](https://apis.io/collections/unfao/open-unfao-downloads-api/)
+- [FAOSTAT Bulk Download Catalog Metadata API](https://apis.io/collections/unfao/open-unfao-metadata-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [FAO FAOSTAT — jsonschema rules](https://apis.io/rules/unfao/unfao-jsonschema-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Unfao Domain Security](https://apis.io/security/unfao/unfao-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/unfao/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/unfao/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/unfao/finops/)
+
+## API Evangelist rating
+
+**Unrated** — no public website could be reached for this company, so there was almost nothing to measure and nothing a reader could check.
+
+This is not a score of zero. No rating is published for this company. If that is wrong because something public exists that we missed, say so on this repository or email [info@apievangelist.com](mailto:info@apievangelist.com) and it will be re-run — free, and no justification needed.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for FAO FAOSTAT: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/unfao/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
